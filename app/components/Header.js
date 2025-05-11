@@ -1,0 +1,31 @@
+"use client"
+import Link from "next/link";
+import { useState } from "react";
+import { Menu, X} from 'lucide-react';
+export default function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  return (
+    <div className="flex justify-between items-center relative bg-[#ffffff] p-7 shadow-md">
+      <p className="text-black text-4xl"><strong className="text-red-600">Show</strong>Time</p>
+      <nav className="hidden md:flex space-x-8">
+        <Link href={"/"} className="text-black">HOME</Link>
+        <Link href={"/"} className="text-black">FAVORITES</Link>
+        <Link href={"/"} className="text-black">ABOUT</Link>
+      </nav>
+
+      <button 
+        onClick={() => setMenuOpen(!menuOpen)} 
+        className="md:hidden text-3xl" >{menuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+      </button>
+
+      {menuOpen && (
+        <nav className="md:hidden flex flex-col items-center w-full absolute bg-white border-t pb-4 top-20 left-0">
+          <Link href="/" className="text-black py-2" onClick={() => setMenuOpen(false)}>HOME</Link>
+          <Link href="/" className="text-black py-2" onClick={() => setMenuOpen(false)}>FAVORITES</Link>
+          <Link href="/" className="text-black py-2" onClick={() => setMenuOpen(false)}>ABOUT</Link>
+        </nav>
+      )}
+    </div>
+  );
+}
