@@ -21,7 +21,7 @@ export default function ShowDetails({ show, episodes }) {
                 <div><strong className="text-gray-700">Network:</strong> {show.network?.name || show.webChannel?.name}</div>
                 <div><strong className="text-gray-700">Status:</strong> {show.status}</div>
                 <div><strong className="text-gray-700">Show type:</strong> {show.type}</div>
-                <div><strong className="text-gray-700">Episodes ordered:</strong> {episodes.length} episodes</div>
+                <div><strong className="text-gray-700">Episodes:</strong> {episodes.length}</div>
                 <div className="max-w-[600px]"><strong className="text-gray-700">About:</strong> <span dangerouslySetInnerHTML={{ __html: show.summary }} /></div>
             </div>
         </div>
