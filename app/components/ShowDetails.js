@@ -1,4 +1,6 @@
+
 import { Star, Clock } from "lucide-react";
+import FavoriteButton from "./FavoriteButton";
 export default function ShowDetails({ show, episodes }) {
     return (
         <div className="w-full rounded-2xl p-4 lg:ml-[-40px] ml-0 ">
@@ -23,6 +25,7 @@ export default function ShowDetails({ show, episodes }) {
                 <div><strong className="text-gray-700">Show type:</strong> {show.type}</div>
                 <div><strong className="text-gray-700">Episodes:</strong> {episodes.length}</div>
                 <div className="max-w-[600px]"><strong className="text-gray-700">About:</strong> <span dangerouslySetInnerHTML={{ __html: show.summary }} /></div>
+                <FavoriteButton id={show.id} />
             </div>
         </div>
     );
