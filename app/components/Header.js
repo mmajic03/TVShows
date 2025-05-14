@@ -10,7 +10,7 @@ export default function Header() {
       <p className="text-black text-4xl"><strong className="text-red-600">Show</strong>Time</p>
       <nav className="hidden md:flex space-x-8">
         <Link href={"/"} className="text-black">HOME</Link>
-        <Link href={"/"} className="text-black">FAVORITES</Link>
+        <Link href={"/favorite"} className="text-black">FAVORITES</Link>
         <Link href={"/"} className="text-black">ABOUT</Link>
       </nav>
 
