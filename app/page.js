@@ -64,7 +64,7 @@ export default function Home(){
         ))}
       </div>
       <div className="flex justify-center my-6">
-        {offset < filteredShow.length && (
+        {offset < filteredAll.length && (
           <button 
             onClick={() => setOffset(offset + 7)} 
             className="bg-[#CC1B1B] text-white px-6 py-4 mt-12 rounded hover:bg-red-700">Load more...
