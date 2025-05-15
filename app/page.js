@@ -33,8 +33,8 @@ export default function Home(){
         return date2 - date1;
       }
       if (filter === "Top rated") {
-        const rating1 = a.rating.average ?? 0;
-        const rating2 = b.rating.average ?? 0;
+        const rating1 = a.rating.average;
+        const rating2 = b.rating.average;
         return rating2 - rating1;
       }
       return 0;
@@ -57,21 +57,23 @@ export default function Home(){
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-      <FilterBar genres={genres} filter={filter} setFilter={setFilter} genreFilter={genreFilter} setGenreFilter={setGenreFilter}/>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 px-4 sm:px-6 md:px-6">
-        {filteredShow.map((show) => (
-          <div key={show.id} className="flex flex-col w-full max-w-[400px] bg-white shadow-md hover:shadow-lg rounded-xl mx-auto">
-            <ShowCardContent show={show}/>
-          </div>
-        ))}
-      </div>
-      <div className="flex justify-center my-6">
-        {offset < filteredAll.length && (
-          <button 
-            onClick={() => setOffset(offset + 7)} 
-            className="bg-[#CC1B1B] text-white px-6 py-4 mt-12 rounded hover:bg-red-700">Load more...
-          </button>
-        )}
+      <div className="w-full max-w-[1600px] mx-auto">
+        <FilterBar genres={genres} filter={filter} setFilter={setFilter} genreFilter={genreFilter} setGenreFilter={setGenreFilter}/>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 px-4 sm:px-6 md:px-6">
+          {filteredShow.map((show) => (
+            <div key={show.id} className="flex flex-col w-full max-w-[400px] bg-white shadow-md hover:shadow-lg rounded-xl mx-auto">
+              <ShowCardContent show={show}/>
+            </div>
+          ))}
+        </div>
+        <div className="flex justify-center my-6">
+          {offset < filteredAll.length && (
+            <button 
+              onClick={() => setOffset(offset + 7)} 
+              className="bg-[#CC1B1B] text-white px-6 py-4 mt-12 rounded hover:bg-red-700">Load more...
+            </button>
+          )}
+        </div>
       </div>
     </>
   );
