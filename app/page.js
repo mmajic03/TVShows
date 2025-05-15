@@ -1,7 +1,7 @@
 "use client"
 import { useState, useEffect } from "react";
 import FilterBar from "./components/FilterBar";
-import ShowCard from "./components/ShowCard";
+import ShowCardContent from "./components/ShowCardContent";
 export default function Home(){
   const [show, setShow] = useState([]);
   const [page, setPage] = useState(0);
@@ -60,7 +60,9 @@ export default function Home(){
       <FilterBar genres={genres} filter={filter} setFilter={setFilter} genreFilter={genreFilter} setGenreFilter={setGenreFilter}/>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 px-4 sm:px-6 md:px-6">
         {filteredShow.map((show) => (
-          <ShowCard key={show.id} show={show}/>
+          <div key={show.id} className="flex flex-col w-full max-w-[400px] bg-white shadow-md hover:shadow-lg rounded-xl mx-auto">
+            <ShowCardContent show={show}/>
+          </div>
         ))}
       </div>
       <div className="flex justify-center my-6">

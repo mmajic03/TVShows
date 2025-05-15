@@ -1,4 +1,4 @@
-import ShowCards from "../components/ShowCard";
+import ShowCardContent from "../components/ShowCardContent";
 
 export default async function FavoritesPage() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/favorites`, {
@@ -33,7 +33,9 @@ export default async function FavoritesPage() {
         <h1 className="text-2xl font-bold mb-4">Favorites</h1>
         <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-4">
           {shows.map((show) => (
-              <ShowCards key={show.id} show={show} />
+            <div className="flex flex-col w-full max-w-[400px] bg-white shadow-md hover:shadow-lg rounded-xl mx-auto">
+                <ShowCardContent show={show}/>
+            </div>
             ))}
         </div>
       </div>
