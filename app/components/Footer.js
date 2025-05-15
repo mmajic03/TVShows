@@ -6,8 +6,8 @@ export default function Footer() {
     <footer className="bg-white/70 py-16 pb-6 px-8 mt-16 shadow-md border-t border-gray-300">
         <div className="grid grid-cols-1 max-w-6xl mx-auto md:grid-cols-4 gap-8 text-center md:text-left justify-items-center md:justify-items-start">
             <div>
-                <p className="text-4xl font-bold mb-2">
-                    <strong className="text-[#CC1B1B]">Show</strong>Time
+                <p className="text-4xl mb-2 text-black">
+                    <strong className="text-red-600">Show</strong>Time
                 </p>
             </div>
             <div className="text-black">
