@@ -2,16 +2,19 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X} from 'lucide-react';
+import { usePathname } from "next/navigation";
+
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+   const pathname = usePathname();
 
   return (
     <div className="flex justify-between items-center relative bg-[#ffffff] p-7 shadow-md">
       <p className="text-black text-4xl"><strong className="text-red-600">Show</strong>Time</p>
       <nav className="hidden md:flex space-x-8">
-        <Link href={"/"} className="text-black">HOME</Link>
-        <Link href={"/favorite"} className="text-black">FAVORITES</Link>
-        <Link href={"/"} className="text-black">ABOUT</Link>
+        <Link href={"/"} className={pathname === "/" ? "text-red-600" : "text-black"}>HOME</Link>
+        <Link href={"/favorite"} className={pathname === "/favorite" ? "text-red-600" : "text-black"}>FAVORITES</Link>
+        <Link href={"/about"} className={pathname === "/about" ? "text-red-600" : "text-black"}>ABOUT</Link>
       </nav>
 
       <button 
