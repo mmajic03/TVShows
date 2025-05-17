@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import FilterBar from "./components/FilterBar";
 import ShowCardContent from "./components/ShowCardContent";
+import Loading from "./loading";
 export default function Home(){
   const [show, setShow] = useState([]);
   const [page, setPage] = useState(0);
@@ -9,16 +10,19 @@ export default function Home(){
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
   const [genreFilter, setGenreFilter] = useState("All");
+  const [isLoading, setIsLoading] = useState(true);
 
   const genres = ["All", "Action", "Adventure", "Anime", "Comedy", "Crime", "Drama", 
     "Family", "Fantasy", "History", "Horror", "Legal", "Medical", "Music", "Mystery", 
     "Romance", "Science-Fiction", "Sports", "Supernatural", "Thriller", "War", "Western"];
 
   useEffect(() => {
+    setIsLoading(true); 
     fetch(`https://api.tvmaze.com/shows?page=${page}`)
     .then(res => res.json())
     .then(data => {
       setShow(prev => [...prev, ...data]);
+      setIsLoading(false);
     })
   }, [page]);
 
@@ -41,6 +45,11 @@ export default function Home(){
     });
 
   const filteredShow = filteredAll.slice(0, offset);
+  if (isLoading && show.length === 0) {
+    return (
+      <Loading />
+    );
+  }
 
   return(
     <>

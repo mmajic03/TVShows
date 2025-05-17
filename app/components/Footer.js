@@ -13,7 +13,7 @@ export default function Footer() {
             <div className="text-black">
                 <h3 className="text-lg font-semibold mb-2">Sitemap</h3>
                 <ul className="text-sm space-y-2">
-                    <li className="mb-3 mt-[-7px]">Explore our site</li>
+                    <li className="mb-3">Explore our site</li>
                     <li><Link href={"/"}>Home</Link></li>
                     <li><Link href={"/favorite"}>Favorites</Link></li>
                     <li><Link href={"/"}>About</Link></li>
