@@ -7,7 +7,7 @@ export default function EpisodeCard({ episode }) {
   const closeModal = () => setShowModal(false);
   return (
     <>
-      <div className="flex flex-col w-full max-w-[300px] bg-white shadow-md hover:shadow-lg rounded-2xl mb-20">
+      <div onClick={() => setShowModal(true)} className="flex flex-col w-full max-w-[300px] bg-white shadow-md hover:shadow-lg rounded-2xl mb-20 cursor-pointer">
           <Image 
             src={episode.image.medium} 
             alt={episode.name} 
@@ -18,12 +18,6 @@ export default function EpisodeCard({ episode }) {
           <div className="flex flex-col p-4 gap-2">
             <h2 className="text-xl text-center font-semibold text-black">{episode.name}</h2>
             <p className="text-sm text-gray-600 text-center">Season: {episode.season} |  Episode: {episode.number}</p>
-            <button 
-              onClick={() => setShowModal(true)} 
-              className="text-blue-600 text-sm underline text-center cursor-pointer"
-            >
-              View
-            </button>
           </div>
        </div>
         {showModal && (

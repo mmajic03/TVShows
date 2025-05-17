@@ -5,7 +5,7 @@ export default function EpisodeModal({ episode, closeModal }) {
   return (
     <>
         <div className="flex items-center justify-center fixed inset-0 z-50 bg-white/80">
-            <div className="flex flex-col items-center relative p-15 text-left w-full max-w-2xl bg-white rounded shadow-2xl space-y-4">
+            <div className="flex flex-col items-center relative p-10 text-left w-full max-w-2xl bg-white rounded shadow-2xl space-y-4">
                 <button 
                     onClick={closeModal} 
                     className="absolute top-4 right-4 p-1 rounded-full cursor-pointer">
@@ -22,6 +22,7 @@ export default function EpisodeModal({ episode, closeModal }) {
                 />
                 <p className="text-gray-700 w-full"><strong className="text-black">Number: </strong>Season {episode.season}, Episode {episode.number}</p>
                 <p className="text-gray-700 w-full"><strong className="text-black">Airdate: </strong> {episode.airdate} at {episode.airtime}</p>
+                <p className="text-gray-700 w-full"><strong className="text-black">Rating:</strong> {episode.rating?.average}</p>
                 <p className="text-gray-700 w-full"><strong className="text-black">Runtime:</strong> {episode.runtime} min</p>
                 <div className="text-gray-700 w-full"><strong className="text-black">Summary:</strong>
                     {episode.summary && (
