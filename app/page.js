@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import FilterBar from "./components/FilterBar";
 import ShowCardContent from "./components/ShowCardContent";
 import Loading from "./loading";
+
 export default function Home(){
   const [show, setShow] = useState([]);
   const [page, setPage] = useState(0);
@@ -18,10 +19,10 @@ export default function Home(){
 
   useEffect(() => {
     setIsLoading(true); 
-    fetch(`https://api.tvmaze.com/shows?page=${page}`)
+    fetch(`https://api.tvmaze.com/shows?page=0`)
     .then(res => res.json())
     .then(data => {
-      setShow(prev => [...prev, ...data]);
+      setShow(data);
       setIsLoading(false);
     })
   }, [page]);
@@ -45,18 +46,17 @@ export default function Home(){
     });
 
   const filteredShow = filteredAll.slice(0, offset);
-  if (isLoading && show.length === 0) {
-    return (
-      <Loading />
-    );
+
+  if (isLoading) {
+    return <Loading />
   }
 
   return(
     <>
       <div className="flex flex-col items-center justify-center w-full min-h-[200px] px-4 md:px-10 sm:px-6 sm:min-h-[250px]">
-        <h1 className="text-7xl sm:text-4xl md:text-5xl lg:text-6xl text-[#CC1B1B] font-bold mb-4">TV Shows</h1>
+        <h1 className="text-black text-6xl mb-3"><strong className="text-red-600">Show</strong>Time</h1>
         <p className="text-lg text-center max-w-2xl text-black hidden md:block">
-          From gripping thrillers to heartfelt dramas and entertaining shows — today's world of television offers something for everyone. Discover the top series you simply can't miss.
+          From gripping thrillers to heartfelt dramas and entertaining shows - today's world of television offers something for everyone. Discover the top series you simply can't miss.
         </p>
         <input 
           type="text" 
@@ -78,7 +78,7 @@ export default function Home(){
         <div className="flex justify-center my-6">
           {offset < filteredAll.length && (
             <button 
-              onClick={() => setOffset(offset + 7)} 
+              onClick={() => setOffset((prev) => prev + 7)} 
               className="bg-[#CC1B1B] text-white px-6 py-4 mt-12 rounded hover:bg-red-700">Load more...
             </button>
           )}
