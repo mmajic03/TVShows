@@ -1,6 +1,6 @@
 import FavoriteShowCard from "../components/FavoriteShowCard";
 export default async function FavoritesPage() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/favorites`, {
+  const res = await fetch("http://localhost:3000/api/favorites", {
     cache: "no-store",
   });
 
