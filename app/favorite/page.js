@@ -13,7 +13,7 @@ export default async function FavoritesPage() {
   if (favorites.length === 0) {
      return (
         <div className="flex items-center justify-center mt-[100px]">
-            <div className="p-4 text-4xl text-black">No saved shows.</div>
+            <div className="p-4 text-2xl text-gray-600">No saved shows.</div>
         </div>
     );
   }
@@ -29,7 +29,6 @@ export default async function FavoritesPage() {
   return (
     <div className="p-4">
       <div className="w-full max-w-[1600px] mx-auto">
-        <h1 className="text-2xl font-bold mb-4">Favorites</h1>
         <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-4">
           {shows.map((show) => (
             <FavoriteShowCard key={show.id} show={show} />
