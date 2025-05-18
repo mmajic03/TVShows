@@ -1,6 +1,24 @@
 import ShowDetails from "@/app/components/ShowDetails";
 import Image from "next/image";
 
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+
+  const res = await fetch(`https://api.tvmaze.com/shows/${id}`);
+  if (!res.ok) {
+    return { title: "Show not found" };
+  }
+  const data = await res.json();
+
+  return {
+    title: `TVShow | ${data.name}`,
+    description: `${data.name} - ${data.summary}`,
+    openGraph: {
+      images: [{ url: data.image?.original || "", width: 600, height: 800 }],
+    },
+  };
+}
+
 export default async function Show({ params }) {
     const { id } = await params;
 
@@ -25,9 +43,10 @@ export default async function Show({ params }) {
                     <Image 
                         src={show.image.original} 
                         alt={show.name} 
-                        width={700} 
+                        width={400} 
                         height={600}
-                        className="w-full max-w-[500px] md:max-w-[700px] h-auto max-h-[600px] object-contain rounded-xl border-none"
+                        priority
+                        className="object-contain rounded-xl"
                     />
                 </div>
                 <ShowDetails show={show} episodes={episodes} />
