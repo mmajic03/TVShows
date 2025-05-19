@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import CrewModal from "./CrewModal";
+//prikaz kartice jedne osobe, kada se klikne na nju otvori se modalni prozor s informacijama o toj osobi
 export default function CrewCard({ crew }) {
   const [showModal, setShowModal] = useState(false);
   const closeModal = () => setShowModal(false);

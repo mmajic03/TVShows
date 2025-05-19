@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import CastModal from "./CastModal";
+//prikaz kartice jednog glumca, kada se klikne na nju otvori se modalni prozor s informacijama o tom glumcu
 export default function CastCard({ cast }) {
   const [showModal, setShowModal] = useState(false);
   const closeModal = () => setShowModal(false);

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function Navigation({ id }) {
+    //usePathname - react hook koji omogućava dohvat i praćenje trenutne putanje URL-a na kojoj se korisnik nalazi
     const pathname = usePathname();
     return (
         <nav className="flex justify-start space-x-8 border-b border-gray-300 text-xl font-bold">

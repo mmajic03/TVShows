@@ -1,6 +1,8 @@
+//odabir filtera na manjim ekranima, filteri se biraju pomoću checkbox-a
 export default function MobileFilters({setMobileFilter, mobileFilter, setGenreFilter, genreFilter, filter, setFilter, genres, sort}){
     return(
         <>
+            {/*prikazuje gumb za otvaranje filtera samo na manjim ekranima */}
             <div className="flex flex-col gap-4 md:hidden p-4 mx-5"> 
                 <button 
                     onClick={() => setMobileFilter(true)} 
@@ -17,6 +19,7 @@ export default function MobileFilters({setMobileFilter, mobileFilter, setGenreFi
                     <p className="w-6 h-6 text-2xl">X</p>
                 </button>
                 </div>
+                {/*filtriranje po žanrovima*/}
                 <div className="mb-4">
                     <label className="block font-semibold mb-2">Genre</label>
                     <div className="flex flex-col gap-2">
@@ -32,6 +35,7 @@ export default function MobileFilters({setMobileFilter, mobileFilter, setGenreFi
                         ))}
                     </div>
                 </div>
+                {/*sortiranje po najvećoj ocjeni, po najnovijim*/}
                 <div className="mb-4 mt-10">
                 <label className="block font-semibold mb-2">Sort by</label>
                     <div className="flex flex-col gap-1">

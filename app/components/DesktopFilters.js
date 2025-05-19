@@ -3,6 +3,7 @@ export default function DesktopFilters({genreFilter, setGenreFilter, filter, set
     return(
       <>
         <div className="hidden md:flex justify-between gap-4 mb-5 mx-7 mt-15">
+          {/*Dropdown za odabir žanra */}
           <select
             value={genreFilter}
             onChange={(e) => setGenreFilter(e.target.value)}
@@ -13,6 +14,7 @@ export default function DesktopFilters({genreFilter, setGenreFilter, filter, set
                 <option key={genre} value={genre}>{genre}</option>
             ))}
           </select>
+          {/*Dropdown za odabir filtera sortiranja */}
           <select
             value={filter}
             onChange={(e) => setFilter(e.target.value)}

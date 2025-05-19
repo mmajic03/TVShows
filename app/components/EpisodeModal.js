@@ -1,6 +1,7 @@
 import Image from "next/image";
 import {X} from 'lucide-react';
 
+//modalni prozor koji prikazuje informacije o određenoj epizodi
 export default function EpisodeModal({ episode, closeModal }) {
   return (
     <>

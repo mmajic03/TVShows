@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Clock, Star } from "lucide-react";
-
+//prikaz male kartice svake serije na početnoj stranici
 export default function ShowCardContent({ show }) {
   return (
     <>

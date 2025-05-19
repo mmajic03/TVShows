@@ -1,5 +1,5 @@
 import CrewCard from "@/app/components/CrewCard";
-
+//prikaz produkcijskog tima pojedine serije
 export default async function CrewPage({ params }) {
     const { id } = await params;
 
@@ -17,6 +17,7 @@ export default async function CrewPage({ params }) {
             <div className="mb-4 text-gray-600">{crew.length} results</div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
                 {crew.map((member, index) => (
+                    //kartica koja prikazuje informacije osobe
                     <CrewCard key={index} crew={member} />
                 ))}
             </div>

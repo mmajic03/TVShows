@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+//dodani metapodaci
 export const metadata = {
   title: "ShowTime",
   description: "Find and explore popular TV shows with ShowTime.",

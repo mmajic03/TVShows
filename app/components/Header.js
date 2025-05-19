@@ -11,17 +11,18 @@ export default function Header() {
   return (
     <div className="flex justify-between items-center relative bg-[#ffffff] p-7 shadow-md">
       <p className="text-black text-4xl"><strong className="text-red-600">Show</strong>Time</p>
+      {/*navigacija za veće ekrane*/}
       <nav className="hidden md:flex space-x-8">
         <Link href={"/"} className={pathname === "/" ? "text-red-600" : "text-black"}>HOME</Link>
         <Link href={"/favorite"} className={pathname === "/favorite" ? "text-red-600" : "text-black"}>FAVORITES</Link>
         <Link href={"/about"} className={pathname === "/about" ? "text-red-600" : "text-black"}>ABOUT</Link>
       </nav>
-
+    {/*gumb za otvaranje i zatvaranje mobilnog menija */}
       <button 
         onClick={() => setMenuOpen(!menuOpen)} 
         className="md:hidden text-3xl" >{menuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
       </button>
-
+    {/*mobilna navigacija*/}
       {menuOpen && (
         <nav className="md:hidden flex flex-col items-center w-full absolute bg-white border-t pb-4 top-20 left-0">
           <Link href="/" className="text-black py-2" onClick={() => setMenuOpen(false)}>HOME</Link>

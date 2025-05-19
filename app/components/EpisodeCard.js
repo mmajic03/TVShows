@@ -2,6 +2,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import EpisodeModal from "./EpisodeModal";
+
+//prikaz kartice jedne epizode, kada se klikne na nju otvori se modalni prozor s informacijama o toj epizodi
 export default function EpisodeCard({ episode }) {
   const [showModal, setShowModal] = useState(false);
   const closeModal = () => setShowModal(false);

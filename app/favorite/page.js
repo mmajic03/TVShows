@@ -1,6 +1,9 @@
 import FavoriteShowCard from "../components/FavoriteShowCard";
 export default async function FavoritesPage() {
+
+  //dohvaća spremljene favorite
   const res = await fetch("http://localhost:3000/api/favorites", {
+    //onemogućuje keširanje
     cache: "no-store",
   });
 
@@ -18,6 +21,7 @@ export default async function FavoritesPage() {
     );
   }
 
+  //dohvaća podatke o svakoj seriji
   const shows = await Promise.all(
     favorites.map(async (id) => {
       const res = await fetch(`https://api.tvmaze.com/shows/${id}`);

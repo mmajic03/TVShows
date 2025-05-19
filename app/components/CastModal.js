@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import {X} from 'lucide-react';
+//modalni prozor koji prikazuje informacije o određenom glumcu
 export default function CastModal({cast, closeModal}){
     return(
         <>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import {X} from 'lucide-react';
+//modalni prozor s informacijama o određenom članu produkcije
 export default function CrewModal({crew, closeModal}){
     return(
         <>

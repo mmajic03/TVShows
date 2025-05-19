@@ -1,5 +1,6 @@
 import CastCard from "@/app/components/CastCard";
 
+//prikaz glumaca pojedine serije
 export default async function Cast({ params }) {
     const { id } = await params;
 
@@ -16,6 +17,7 @@ export default async function Cast({ params }) {
             <div className="mb-4 text-gray-600">{cast.length} results</div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
                 {cast.map((actor) => (
+                    //kartica koja prikazuje pojedinog glumca
                     <CastCard key={actor.character.id} cast={actor} />
                 ))}
             </div>

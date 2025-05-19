@@ -17,6 +17,7 @@ export default function Home(){
     "Family", "Fantasy", "History", "Horror", "Legal", "Medical", "Music", "Mystery", 
     "Romance", "Science-Fiction", "Sports", "Supernatural", "Thriller", "War", "Western"];
 
+  //Dohvaćanje podataka s API-ja
   useEffect(() => {
     setIsLoading(true); 
     fetch(`https://api.tvmaze.com/shows?page=0`)
@@ -28,15 +29,19 @@ export default function Home(){
   }, [page]);
 
 
+  
   const filteredAll = show
+    //prikazuje samo serije čiji naziv sadrži tekst koji je korisnik upisao u search input
     .filter((show) => show.name.toLowerCase().includes(search.toLowerCase()))
     .filter((show) => genreFilter === "All" ? true : show.genres.includes(genreFilter))
+     //sortiranje serija prema datumu premijere, od najnovijih prema najstraijim
     .sort((a, b) => {
       if (filter === "Latest") {
         const date1 = a.premiered ? new Date(a.premiered) : new Date(0);
         const date2 = b.premiered ? new Date(b.premiered) : new Date(0);
         return date2 - date1;
       }
+      //sortiranje prema prosječnoj ocjeni
       if (filter === "Top rated") {
         const rating1 = a.rating.average;
         const rating2 = b.rating.average;
@@ -45,6 +50,8 @@ export default function Home(){
       return 0;
     });
 
+    //uzima se samo prvih "offset" serija za prikaz(npr. prvih 20, a nakon 
+    // klika na "Load more" prikazuje se više)
   const filteredShow = filteredAll.slice(0, offset);
 
   if (isLoading) {
@@ -76,6 +83,9 @@ export default function Home(){
           ))}
         </div>
         <div className="flex justify-center my-6">
+          {/*prikaziva se  gumb "Load more" samo ako je trenutno prikazan 
+          broj serija(offset) manji od ukupnog broja filtriranih serija, 
+          klik na gumb povećava broj prikazanih serija za 7*/}
           {offset < filteredAll.length && (
             <button 
               onClick={() => setOffset((prev) => prev + 7)} 

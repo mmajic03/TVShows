@@ -1,5 +1,6 @@
 import EpisodeCard from "@/app/components/EpisodeCard";
 
+//prikaz epizoda pojedine serije
 export default async function Episodes({ params }) {
     const { id } = await params;
 
@@ -14,6 +15,7 @@ export default async function Episodes({ params }) {
             <div className="mb-4 text-gray-600">{episodes.length} results</div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
                 {episodes.map((episode) => (
+                    //prikaz kartice jedne epizode
                     <EpisodeCard key={episode.id} episode={episode} />
                 ))}
             </div>

@@ -1,6 +1,7 @@
 import ShowDetails from "@/app/components/ShowDetails";
 import Image from "next/image";
 
+//metapodaci za pojedinu seriju
 export async function generateMetadata({ params }) {
   const { id } = await params;
 
@@ -14,6 +15,7 @@ export async function generateMetadata({ params }) {
     title: `TVShow | ${data.name}`,
     description: `${data.name} - ${data.summary}`,
     openGraph: {
+        //slika za dijeljenje na npr.društvenim mrežama
       images: [{ url: data.image?.original || "", width: 600, height: 800 }],
     },
   };
@@ -21,7 +23,8 @@ export async function generateMetadata({ params }) {
 
 export default async function Show({ params }) {
     const { id } = await params;
-
+    
+    // Dohvaća podatke o seriji i epizodama paraleln
     const [showRes, episodesRes] = await Promise.all([
         fetch(`https://api.tvmaze.com/shows/${id}`),
         fetch(`https://api.tvmaze.com/shows/${id}/episodes`)
