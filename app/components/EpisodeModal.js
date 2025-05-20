@@ -1,8 +1,9 @@
 import Image from "next/image";
 import {X} from 'lucide-react';
+import FavoriteEpisodeButton from "./FavoriteEpisodeButton";
 
 //modalni prozor koji prikazuje informacije o određenoj epizodi
-export default function EpisodeModal({ episode, closeModal }) {
+export default function EpisodeModal({ episode, closeModal, isFavorite }) {
   return (
     <>
         <div className="flex items-center justify-center fixed inset-0 z-50 bg-white/80">
@@ -33,6 +34,7 @@ export default function EpisodeModal({ episode, closeModal }) {
                         />
                     )}
                 </div>
+                <FavoriteEpisodeButton id={episode.id} isFavorite={isFavorite}/>
             </div>
         </div>
     </>
