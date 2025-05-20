@@ -3,7 +3,7 @@ export default function MobileFilters({setMobileFilter, mobileFilter, setGenreFi
     return(
         <>
             {/*prikazuje gumb za otvaranje filtera samo na manjim ekranima */}
-            <div className="flex flex-col gap-4 md:hidden p-4 mx-5"> 
+            <div className="flex justify-start md:hidden p-4 mx-5"> 
                 <button 
                     onClick={() => setMobileFilter(true)} 
                     className="w-90 bg-[#CC1B1B] text-white px-4 py-4 rounded ml-5 hover:bg-red-700">
