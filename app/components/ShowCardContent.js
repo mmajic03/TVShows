@@ -5,7 +5,8 @@ import { Clock, Star } from "lucide-react";
 export default function ShowCardContent({ show }) {
   return (
     <>
-      <Image 
+      <Link href={`/show/${show.id}`}>
+        <Image 
         src={show.image?.medium || "/placeholder.png"} 
         alt={show.name} 
         width={400} 
@@ -34,9 +35,9 @@ export default function ShowCardContent({ show }) {
           </div>
         </div>
         <div className="mt-1 ml-[-4px]">
-          <Link href={`/show/${show.id}`} className="block text-center text-blue-600 text-sm underline sm:text-left">View</Link>
         </div>
       </div>
+      </Link>
     </>
   );
 }

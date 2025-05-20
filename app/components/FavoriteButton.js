@@ -1,15 +1,15 @@
 "use client";
 import { useState, useEffect, useTransition } from "react";
 
-export default function FavoriteButton({ id, initialSaved = false }) {
-  const [saved, setSaved] = useState(initialSaved);
+export default function FavoriteButton({ id, isFavorite}) {
+  const [saved, setSaved] = useState(isFavorite);
   const [isPending, startTransition] = useTransition();
   const [checking, setChecking] = useState(true); 
 
   //provjerava se je li određena serija već u favoritima tj. je li taj dani ID već postoji
   //u favoritima. Ako postoji, stanje saved se postavlja na true i checking na false
   useEffect(() => {
-    if (initialSaved) return;
+    if (isFavorite) return;
     fetch("/api/favorites")
       .then((res) => res.json())
       .then((data) => {
@@ -18,7 +18,7 @@ export default function FavoriteButton({ id, initialSaved = false }) {
         }
       })
       .finally(() => setChecking(false));
-  }, [initialSaved, id]);
+  }, [isFavorite, id]);
 
 
   //dodavanje serija u favorite slanjem POST zahtjeva

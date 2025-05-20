@@ -25,19 +25,21 @@ export default async function Show({ params }) {
     const { id } = await params;
     
     // Dohvaća podatke o seriji i epizodama paraleln
-    const [showRes, episodesRes] = await Promise.all([
-        fetch(`https://api.tvmaze.com/shows/${id}`),
-        fetch(`https://api.tvmaze.com/shows/${id}/episodes`)
-    ]);
-    if (!showRes.ok) {
-        throw new Error("Show not found");
-    }
-    const show = await showRes.json();
+     const [showRes, episodesRes, favRes] = await Promise.all([
+    fetch(`https://api.tvmaze.com/shows/${id}`),
+    fetch(`https://api.tvmaze.com/shows/${id}/episodes`),
+    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/favorites`, { cache: "no-store" })
+  ]);
 
-    if (!episodesRes.ok) {
-        throw new Error("Episodes not found");
-    }
-    const episodes = await episodesRes.json();
+  if (!showRes.ok) throw new Error("Show not found");
+  if (!episodesRes.ok) throw new Error("Episodes not found");
+  if (!favRes.ok) throw new Error("Favorites fetch error");
+
+  const show = await showRes.json();
+  const episodes = await episodesRes.json();
+  const { favorites } = await favRes.json();
+
+  const isFavorite = favorites.includes(show.id);
 
     return (
         <div className="flex flex-col justify-start w-full bg-white/80 ">
@@ -52,7 +54,7 @@ export default async function Show({ params }) {
                         className="object-contain rounded-xl"
                     />
                 </div>
-                <ShowDetails show={show} episodes={episodes} />
+                <ShowDetails show={show} episodes={episodes}  isFavorite={isFavorite}/>
             </div>
         </div>
     );

@@ -2,7 +2,7 @@
 import { Star, Clock } from "lucide-react";
 import FavoriteButton from "./FavoriteButton";
 //prikaz informacija za svaku seriju
-export default function ShowDetails({ show, episodes }) {
+export default function ShowDetails({ show, episodes, isFavorite }) {
     return (
         <div className="w-full rounded-2xl p-4 lg:ml-[-40px] ml-0 ">
             <h1 className="text-5xl font-extrabold  mt-1 mb-4">{show.name}</h1>
@@ -28,7 +28,7 @@ export default function ShowDetails({ show, episodes }) {
                 {/*Iako je opasno, ovdje možemo koristiti dangerouslySetInnerHTML jer sadržaj dolazi s pouzdanog TVMaze API-ja,  
                 služi kako bi prikazao HTML opis serije iz API-ja(npr. da nema <p> <b>...)*/}
                 <div className="max-w-[600px]"><strong className="text-gray-700">About:</strong> <span dangerouslySetInnerHTML={{ __html: show.summary }} /></div>
-                <FavoriteButton id={show.id} />
+                <FavoriteButton id={show.id} isFavorite={isFavorite}/>
             </div>
         </div>
     );
