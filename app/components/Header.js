@@ -26,8 +26,8 @@ export default function Header() {
       {menuOpen && (
         <nav className="md:hidden flex flex-col items-center w-full absolute bg-white border-t pb-4 top-20 left-0">
           <Link href="/" className="text-black py-2" onClick={() => setMenuOpen(false)}>HOME</Link>
-          <Link href="/" className="text-black py-2" onClick={() => setMenuOpen(false)}>FAVORITES</Link>
-          <Link href="/" className="text-black py-2" onClick={() => setMenuOpen(false)}>ABOUT</Link>
+          <Link href="/favorite" className="text-black py-2" onClick={() => setMenuOpen(false)}>FAVORITES</Link>
+          <Link href="/about" className="text-black py-2" onClick={() => setMenuOpen(false)}>ABOUT</Link>
         </nav>
       )}
     </div>
