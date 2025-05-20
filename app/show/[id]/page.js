@@ -25,10 +25,10 @@ export default async function Show({ params }) {
     const { id } = await params;
     
     // Dohvaća podatke o seriji i epizodama paraleln
-     const [showRes, episodesRes, favRes] = await Promise.all([
+    const [showRes, episodesRes, favRes] = await Promise.all([
     fetch(`https://api.tvmaze.com/shows/${id}`),
     fetch(`https://api.tvmaze.com/shows/${id}/episodes`),
-    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/favorites`, { cache: "no-store" })
+    fetch("http://localhost:3000/api/favorites", { cache: "no-store" })
   ]);
 
   if (!showRes.ok) throw new Error("Show not found");
