@@ -28,7 +28,7 @@ export default async function Show({ params }) {
     const [showRes, episodesRes, favRes] = await Promise.all([
     fetch(`https://api.tvmaze.com/shows/${id}`),
     fetch(`https://api.tvmaze.com/shows/${id}/episodes`),
-    fetch("http://localhost:3000/api/favorites", { cache: "no-store" })
+    fetch("/api/favorites", { cache: "no-store" })
   ]);
 
   if (!showRes.ok) throw new Error("Show not found");
