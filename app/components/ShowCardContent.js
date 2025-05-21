@@ -5,7 +5,7 @@ import { Clock, Star } from "lucide-react";
 export default function ShowCardContent({ show }) {
   return (
     <>
-      <Link href={`/show/${show.id}`} passHref>
+      <Link href={`/show/${show.id}`}>
         <Image 
           src={show.image?.medium || "/placeholder.png"} 
           alt={show.name} 
