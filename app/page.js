@@ -63,7 +63,7 @@ export default function Home(){
       <div className="flex flex-col items-center justify-center w-full min-h-[200px] px-4 md:px-10 sm:px-6 sm:min-h-[250px]">
         <h1 className="text-black text-6xl mb-3"><strong className="text-red-600">Show</strong>Time</h1>
         <h2 className="text-lg text-center max-w-2xl text-black hidden md:block">
-          From gripping thrillers to heartfelt dramas and entertaining shows - today's world of television offers something for everyone. Discover the top series you simply can't miss.
+          From gripping thrillers to heartfelt dramas and entertaining shows - today&apos;s world of television offers something for everyone. Discover the top series you simply can&apos;t miss.
         </h2>
         <input 
           type="text" 

@@ -8,7 +8,7 @@ export default function Footer() {
             <div>
                 <div className="text-5xl mb-2 text-black">
                     <strong className="text-red-600">Show</strong>Time
-                    <p className="text-sm text-gray-700">Discover the top series you simply can't miss.</p>
+                    <p className="text-sm text-gray-700">Discover the top series you simply can&apos;t miss.</p>
                 </div>
             </div>
             <div className="text-black lg:pl-10">
