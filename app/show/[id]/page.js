@@ -3,7 +3,7 @@ import Image from "next/image";
 
 //metapodaci za pojedinu seriju
 export async function generateMetadata({ params }) {
-  const { id } = params;
+  const { id } = await params;
 
   const res = await fetch(`https://api.tvmaze.com/shows/${id}`);
   if (!res.ok) {
@@ -22,13 +22,13 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Show({ params }) {
-    const { id } = params;
+    const { id } = await params;
     
     // Dohvaća podatke o seriji i epizodama paraleln
     const [showRes, episodesRes, favRes] = await Promise.all([
     fetch(`https://api.tvmaze.com/shows/${id}`),
     fetch(`https://api.tvmaze.com/shows/${id}/episodes`),
-    fetch("/api/favorites", { cache: "no-store" })
+    fetch("http://localhost:3000/api/favorites", { cache: "no-store" })
   ]);
 
   if (!showRes.ok) throw new Error("Show not found");
