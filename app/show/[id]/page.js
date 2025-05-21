@@ -46,8 +46,8 @@ export default async function Show({ params }) {
             <div className="flex flex-col md:flex-row w-full md:-mt-4 lg:gap-x-6">
                 <div className="flex justify-center w-full md:w-1/2">
                     <Image 
-                        src={show.image.original} 
-                        alt={show.name} 
+                        src={show.image.original || "/placeholder.png"} 
+                        alt={show.name || "TVShow"} 
                         width={400} 
                         height={600}
                         priority
