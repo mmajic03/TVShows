@@ -26,11 +26,11 @@ export default function FavoriteEpisodeCard({ episode }) {
   if (!isVisible) return null;
 
   return (
-    <div className="flex flex-col w-full relative">
+    <div className="w-full max-w-[300px] relative mx-auto mb-20">
       <button
         disabled={isPending}
         onClick={removeFavorite}
-        className="top-2 right-2 p-1 text-black bg-gray-100 rounded-full absolute cursor-pointer"
+        className="top-2 right-2 z-20 p-1 absolute text-black bg-gray-100 hover:text-red-600 rounded-full"
       >
         <X className="w-5 h-5" />
       </button>

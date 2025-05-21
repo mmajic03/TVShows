@@ -26,7 +26,7 @@ export default function FavoriteShowCard({ show }) {
       <button
         disabled={isPending}
         onClick={removeFavorite}
-        className="absolute top-2 right-2 p-0.5 text-black  bg-gray-100 rounded-2xl cursor-pointer"
+        className="absolute top-2 right-2 p-1 text-black  bg-gray-100  hover:text-red-600 cursor-pointer rounded-full"
       >
         <X className="w-5 h-5" />
       </button>

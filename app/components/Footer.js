@@ -6,20 +6,21 @@ export default function Footer() {
     <footer className="bg-white/70 py-16 pb-6 px-8 mt-16 shadow-md border-t border-gray-300">
         <div className="grid grid-cols-1 max-w-6xl mx-auto md:grid-cols-4 gap-8 text-center md:text-left justify-items-center md:justify-items-start">
             <div>
-                <p className="text-4xl mb-2 text-black">
+                <div className="text-5xl mb-2 text-black">
                     <strong className="text-red-600">Show</strong>Time
-                </p>
+                    <p className="text-sm text-gray-700">Discover the top series you simply can't miss.</p>
+                </div>
             </div>
-            <div className="text-black">
-                <h3 className="text-lg font-semibold mb-2">Sitemap</h3>
-                <ul className="text-sm space-y-2">
+            <div className="text-black lg:pl-10">
+                <h3 className="text-lg font-semibold mb-1">Sitemap</h3>
+                <ul className="text-sm space-y-1">
                     <li className="mb-3">Explore our site</li>
                     <li><Link href={"/"}>Home</Link></li>
                     <li><Link href={"/favorite"}>Favorites</Link></li>
                     <li><Link href={"/"}>About</Link></li>
                 </ul>
             </div>
-            <div className="text-black">
+            <div className="text-black lg:pl-10">
                 <h3 className="text-lg font-semibold mb-4">Info</h3>
                 <ul className="text-sm space-y-1">
                     <li><Link href={"/"}>Terms of Use</Link></li>
@@ -28,7 +29,7 @@ export default function Footer() {
                     <li><Link href={"/"}>Cookies Settings</Link></li>
                 </ul>
             </div>
-            <div className="text-black">
+            <div className="text-black lg:pl-10">
                 <h3 className="text-lg font-semibold mb-4">Follow us</h3>
                 <ul className="text-sm space-y-1">
                     <li><Link href={"/"}>Instagram</Link></li>

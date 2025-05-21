@@ -1,12 +1,13 @@
+import {X} from 'lucide-react';
 //odabir filtera na manjim ekranima, filteri se biraju pomoću checkbox-a
 export default function MobileFilters({setMobileFilter, mobileFilter, setGenreFilter, genreFilter, filter, setFilter, genres, sort}){
     return(
         <>
             {/*prikazuje gumb za otvaranje filtera samo na manjim ekranima */}
-            <div className="flex justify-start md:hidden p-4 mx-5"> 
+            <div className="flex justify-center md:hidden p-4 mx-5"> 
                 <button 
                     onClick={() => setMobileFilter(true)} 
-                    className="w-90 bg-[#CC1B1B] text-white px-4 py-4 rounded ml-5 hover:bg-red-700">
+                    className="w-90 bg-[#CC1B1B] text-white px-4 py-4 rounded  hover:bg-red-700">
                         Filters
                 </button>
             </div>
@@ -16,7 +17,7 @@ export default function MobileFilters({setMobileFilter, mobileFilter, setGenreFi
                 <div className="flex justify-between items-center mb-6">
                 <h2 className=" text-xl font-bold">Filters</h2>
                 <button onClick={() => setMobileFilter(false)}>
-                    <p className="w-6 h-6 text-2xl">X</p>
+                    <p className="w-6 h-6 text-2xl"><X className="w-7 h-7" /></p>
                 </button>
                 </div>
                 {/*filtriranje po žanrovima*/}
