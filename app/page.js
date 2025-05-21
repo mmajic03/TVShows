@@ -62,9 +62,9 @@ export default function Home(){
     <>
       <div className="flex flex-col items-center justify-center w-full min-h-[200px] px-4 md:px-10 sm:px-6 sm:min-h-[250px]">
         <h1 className="text-black text-6xl mb-3"><strong className="text-red-600">Show</strong>Time</h1>
-        <p className="text-lg text-center max-w-2xl text-black hidden md:block">
+        <h2 className="text-lg text-center max-w-2xl text-black hidden md:block">
           From gripping thrillers to heartfelt dramas and entertaining shows - today's world of television offers something for everyone. Discover the top series you simply can't miss.
-        </p>
+        </h2>
         <input 
           type="text" 
           placeholder="Search" 
@@ -76,9 +76,9 @@ export default function Home(){
       <div className="w-full max-w-[1600px] mx-auto">
         <FilterBar genres={genres} filter={filter} setFilter={setFilter} genreFilter={genreFilter} setGenreFilter={setGenreFilter}/>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 px-4 sm:px-6 md:px-6">
-          {filteredShow.map((show) => (
+          {filteredShow.map((show, index) => (
             <div key={show.id} className="flex flex-col w-full max-w-[400px] bg-white shadow-md hover:shadow-lg rounded-xl mx-auto">
-              <ShowCardContent show={show}/>
+              <ShowCardContent show={show} priority={index < 20}/>
             </div>
           ))}
         </div>
