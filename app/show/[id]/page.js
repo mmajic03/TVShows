@@ -3,7 +3,7 @@ import Image from "next/image";
 
 //metapodaci za pojedinu seriju
 export async function generateMetadata({ params }) {
-  const { id } = await params;
+  const { id } = params;
 
   const res = await fetch(`https://api.tvmaze.com/shows/${id}`);
   if (!res.ok) {
