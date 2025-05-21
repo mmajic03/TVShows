@@ -1,44 +1,50 @@
+"use client";
+import { useEffect, useState } from "react";
 import FavoriteShowCard from "../components/FavoriteShowCard";
-export default async function FavoritesPage() {
 
-  //dohvaća spremljene favorite
-  const res = await fetch("http://localhost:3000/api/favorites", {
-    //onemogućuje keširanje
-    cache: "no-store",
-  });
+export default function FavoritesPage() {
+  const [shows, setShows] = useState(null);
+  const [error, setError] = useState(null);
 
-  if (!res.ok) {
-    return <div className="p-4 text-red-600">Error fetching favorites</div>;
-  }
+  useEffect(() => {
+    async function fetchFavorites() {
+      try {
+        const res = await fetch("/api/favorites");
+        const { favorites } = await res.json();
 
-  const { favorites } = await res.json();
+        const showsData = await Promise.all(
+          favorites.map(async (id) => {
+            const res = await fetch(`https://api.tvmaze.com/shows/${id}`);
+            return res.json();
+          })
+        );
+        setShows(showsData);
+      } catch (e) {
+        setError(e.message);
+      }
+    }
 
-  if (favorites.length === 0) {
-     return (
-        <div className="flex items-center justify-center mt-[100px]">
-            <div className="p-4 text-2xl text-gray-600">No saved shows.</div>
-        </div>
+    fetchFavorites();
+  }, []);
+
+  if (error) 
+    return <div className="p-4 text-red-600">{error}</div>
+
+  if (!shows) 
+    return <div className="p-4">Loading...</div>
+
+  if (shows.length === 0)
+    return (
+      <div className="flex items-center justify-center mt-[100px]">
+        <div className="p-4 text-2xl text-gray-600">No saved shows</div>
+      </div>
     );
-  }
-
-  //dohvaća podatke o svakoj seriji
-  const shows = await Promise.all(
-    favorites.map(async (id) => {
-      const res = await fetch(`https://api.tvmaze.com/shows/${id}`);
-      if (!res.ok) return null;
-      return res.json();
-    })
-  );
 
   return (
-    <div className="p-4">
-      <div className="w-full max-w-[1600px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-4">
-          {shows.map((show) => (
-            <FavoriteShowCard key={show.id} show={show} />
-            ))}
-        </div>
-      </div>
+    <div className="p-4 max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-4">
+      {shows.map((show) => (
+        <FavoriteShowCard key={show.id} show={show} />
+      ))}
     </div>
   );
 }
