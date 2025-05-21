@@ -89,7 +89,7 @@ export default function Home(){
           {offset < filteredAll.length && (
             <button 
               onClick={() => setOffset((prev) => prev + 7)} 
-              className="bg-[#CC1B1B] text-white px-6 py-4 mt-12 rounded hover:bg-red-700">Load more...
+              className="bg-red-600 text-white px-6 py-4 mt-12 rounded hover:bg-red-700">Load more...
             </button>
           )}
         </div>
