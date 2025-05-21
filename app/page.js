@@ -76,7 +76,7 @@ export default function Home(){
       <div className="w-full max-w-[1600px] mx-auto">
         <FilterBar genres={genres} filter={filter} setFilter={setFilter} genreFilter={genreFilter} setGenreFilter={setGenreFilter}/>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 px-4 sm:px-6 md:px-6">
-          {filteredShow.map((show, index) => (
+          {filteredShow.map((show) => (
             <div key={show.id} className="flex flex-col w-full max-w-[400px] bg-white shadow-md hover:shadow-lg rounded-xl mx-auto">
               <ShowCardContent show={show}/>
             </div>
