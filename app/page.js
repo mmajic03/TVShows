@@ -21,22 +21,20 @@ export default function Home(){
   useEffect(() => {
     setIsLoading(true); 
     fetch(`https://api.tvmaze.com/shows?page=0`)
-      .then(res => res.json())
-      .then(data => {
-        setShow(data);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.error("Greška u dohvaćanju podataka:", err);
-        setIsLoading(false);
-      });
+    .then(res => res.json())
+    .then(data => {
+      setShow(data);
+      setIsLoading(false);
+    })
   }, [page]);
 
+
+  
   const filteredAll = show
     //prikazuje samo serije čiji naziv sadrži tekst koji je korisnik upisao u search input
     .filter((show) => show.name.toLowerCase().includes(search.toLowerCase()))
     .filter((show) => genreFilter === "All" ? true : show.genres.includes(genreFilter))
-    //sortiranje serija prema datumu premijere, od najnovijih prema najstraijim
+     //sortiranje serija prema datumu premijere, od najnovijih prema najstraijim
     .sort((a, b) => {
       if (filter === "Latest") {
         const date1 = a.premiered ? new Date(a.premiered) : new Date(0);
@@ -45,15 +43,15 @@ export default function Home(){
       }
       //sortiranje prema prosječnoj ocjeni
       if (filter === "Top rated") {
-        const rating1 = a.rating.average || 0;
-        const rating2 = b.rating.average || 0;
+        const rating1 = a.rating.average;
+        const rating2 = b.rating.average;
         return rating2 - rating1;
       }
       return 0;
     });
 
-  //uzima se samo prvih "offset" serija za prikaz(npr. prvih 20, a nakon 
-  // klika na "Load more" prikazuje se više)
+    //uzima se samo prvih "offset" serija za prikaz(npr. prvih 20, a nakon 
+    // klika na "Load more" prikazuje se više)
   const filteredShow = filteredAll.slice(0, offset);
 
   if (isLoading) {
