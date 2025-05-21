@@ -1,10 +1,20 @@
 import Image from "next/image";
 import {X} from 'lucide-react';
+import { useState, useEffect } from "react";
 import FavoriteEpisodeButton from "./FavoriteEpisodeButton";
 
 //modalni prozor koji prikazuje informacije o određenoj epizodi
-export default function EpisodeModal({ episode, closeModal, isFavorite }) {
-  return (
+export default function EpisodeModal({ episode, closeModal}) {
+    const [isFavorite, setIsFavorite] = useState(false);
+    useEffect(() => {
+        fetch("/api/favoriteEpisodes")
+        .then((res) => res.json())
+        .then((data) => {
+            setIsFavorite(data.favoriteEpisodes.includes(episode.id));
+        })
+        .catch((err) => console.error("Failed to fetch favorite episodes", err));
+    }, [episode.id]);
+    return (
     <>
         <div className="flex items-center justify-center fixed inset-0 z-50 bg-white/80">
             <div className="flex flex-col items-center relative p-10 text-left w-full max-w-2xl bg-white rounded shadow-2xl space-y-4">

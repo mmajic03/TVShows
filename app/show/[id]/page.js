@@ -24,8 +24,8 @@ export async function generateMetadata({ params }) {
 export default async function Show({ params }) {
     const { id } = await params;
     
-    // Dohvaća podatke o seriji i epizodama paraleln
-    const [showRes, episodesRes, favRes] = await Promise.all([
+    // Dohvaća podatke o seriji i epizodama paralelno
+    const [showRes, episodesRes] = await Promise.all([
     fetch(`https://api.tvmaze.com/shows/${id}`),
     fetch(`https://api.tvmaze.com/shows/${id}/episodes`),
   ]);
