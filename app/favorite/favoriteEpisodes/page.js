@@ -2,7 +2,7 @@ import FavoriteEpisodeCard from "@/app/components/FavoriteEpisodesCard";
 
 export default async function FavoriteEpisodesPage() {
   //dohvaća spremljene favorite
-  const res = await fetch("/api/favoriteEpisodes", {
+  const res = await fetch("http://localhost:3000/api/favoriteEpisodes", {
     cache: "no-store", 
   });
 
