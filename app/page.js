@@ -1,3 +1,6 @@
+//Ova komponenta predstavlja glavnu početnu stranicu koja dohvaća serije s glavnog
+//API-ja(TVmaze). Omogućuje filtriranje po žanrovima, pretraživanje i sortiranje
+//prikazanih serija prema datumu premijere i prema ocjenama.
 "use client"
 import { useState, useEffect } from "react";
 import FilterBar from "./components/FilterBar";
@@ -17,7 +20,10 @@ export default function Home(){
     "Family", "Fantasy", "History", "Horror", "Legal", "Medical", "Music", "Mystery", 
     "Romance", "Science-Fiction", "Sports", "Supernatural", "Thriller", "War", "Western"];
 
-  //Dohvaćanje podataka s API-ja
+  //Dohvaća popis serija s TVmaze API-js kad se promijeni broj stranice.
+  //Postavlja se loading stanje dok traje dohvat i ažurira prikaz serija nakon što podaci stignu.
+  //Ovaj API vraća podatke o serijama u stranicama kako nebi ušitavao sve odjednom jer bi to predugo trajalo
+  //i zauzimalo bi puno memorije
   useEffect(() => {
     setIsLoading(true); 
     fetch(`https://api.tvmaze.com/shows?page=0`)
@@ -31,17 +37,20 @@ export default function Home(){
 
   
   const filteredAll = show
-    //prikazuje samo serije čiji naziv sadrži tekst koji je korisnik upisao u search input
+    //Filtriraju se samo one serije čiji naziv sadrži tekst koji je upisan u polje za pretraživanje(zanemaruje se razlika velikih i malih slova)
     .filter((show) => show.name.toLowerCase().includes(search.toLowerCase()))
+    //filtriranje po žanrovima(Ako nije odabrano 'All' prikazuju se samo serije koje sadrže odabrani žanr)
     .filter((show) => genreFilter === "All" ? true : show.genres.includes(genreFilter))
-     //sortiranje serija prema datumu premijere, od najnovijih prema najstraijim
+    //sortira rezultate prema odabranom kriteriju
     .sort((a, b) => {
+      //sortiranje prema datumu premijere
       if (filter === "Latest") {
+        //newDate(a.premiered)-pretvara datum u objekt
         const date1 = a.premiered ? new Date(a.premiered) : new Date(0);
         const date2 = b.premiered ? new Date(b.premiered) : new Date(0);
         return date2 - date1;
       }
-      //sortiranje prema prosječnoj ocjeni
+      //sortiranje prema prosječnoj ocjeni korisnika
       if (filter === "Top rated") {
         const rating1 = a.rating.average;
         const rating2 = b.rating.average;
@@ -50,8 +59,8 @@ export default function Home(){
       return 0;
     });
 
-    //uzima se samo prvih "offset" serija za prikaz(npr. prvih 20, a nakon 
-    // klika na "Load more" prikazuje se više)
+  //uzima samo prvih offset serija iz već filtriranog i sortiranog popisa kako bi se
+  //ograničio broj prikazanih rezultata na stranici(0-početni indeks, offset-do kojeg indeksa idemo, al on nije uključen)
   const filteredShow = filteredAll.slice(0, offset);
 
   if (isLoading) {
@@ -82,10 +91,9 @@ export default function Home(){
             </div>
           ))}
         </div>
+        {/*ako je offset(broj trenutno prikazanih serija) manji od ukupnog broja serija koje su prošli filtriranje
+        (filterAll.length) gumb se prikaže */}
         <div className="flex justify-center my-6">
-          {/*prikaziva se  gumb "Load more" samo ako je trenutno prikazan 
-          broj serija(offset) manji od ukupnog broja filtriranih serija, 
-          klik na gumb povećava broj prikazanih serija za 7*/}
           {offset < filteredAll.length && (
             <button 
               onClick={() => setOffset((prev) => prev + 7)} 

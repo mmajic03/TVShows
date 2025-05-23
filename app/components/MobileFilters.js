@@ -1,9 +1,11 @@
+//Komponenta prikazuje sučelje za filtriranje i sortiranje sadržaja na mobilnim uređajima.
+//Omogućuje korisnicima da odaberu žanrove i sortiraju sadržaj pomoću checkbox-ova u izborniku sa strane.
 import {X} from 'lucide-react';
-//odabir filtera na manjim ekranima, filteri se biraju pomoću checkbox-a
 export default function MobileFilters({setMobileFilter, mobileFilter, setGenreFilter, genreFilter, filter, setFilter, genres, sort}){
     return(
         <>
-            {/*prikazuje gumb za otvaranje filtera samo na manjim ekranima */}
+            {/*Klikom na gumb 'Filters', mijenja se stanje mobileFilter na true (određuje je li izbornik sa strane prikazan) i dok je true prikazuju se
+            checkbox-ovi za filtriranje. Kada kliknemo X, stanje se mijenja u false i izbornik se zatvara. */}
             <div className="flex justify-center md:hidden p-4 mx-5"> 
                 <button 
                     onClick={() => setMobileFilter(true)} 
@@ -20,7 +22,6 @@ export default function MobileFilters({setMobileFilter, mobileFilter, setGenreFi
                     <p className="w-6 h-6 text-2xl"><X className="w-7 h-7" /></p>
                 </button>
                 </div>
-                {/*filtriranje po žanrovima*/}
                 <div className="mb-4">
                     <label className="block font-semibold mb-2">Genre</label>
                     <div className="flex flex-col gap-2">
@@ -36,7 +37,8 @@ export default function MobileFilters({setMobileFilter, mobileFilter, setGenreFi
                         ))}
                     </div>
                 </div>
-                {/*sortiranje po najvećoj ocjeni, po najnovijim*/}
+                {/*Za svaku opciju iz niza sort, koju smo dobili iz roditeljske komponente, prikazuje se checkbox.
+                Ako je trenutna opcija jednaka vrijednosti 'filter', checkbox je označen.*/}
                 <div className="mb-4 mt-10">
                 <label className="block font-semibold mb-2">Sort by</label>
                     <div className="flex flex-col gap-1">

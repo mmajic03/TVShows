@@ -1,9 +1,13 @@
+//Navigacija za pojedinu seriju. Prima ID serije i kroz navigaciju se može odabrati 'Overview', 'Episodes', 'Cast' i 'Crew' za seriju s tim ID-om.
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function Navigation({ id }) {
-    //usePathname - react hook koji omogućava dohvat i praćenje trenutne putanje URL-a na kojoj se korisnik nalazi
+    //usePathname - react hook koji omogućava dohvat i praćenje trenutnog URL-a na kojoj se korisnik nalazi
+    //Kada korisnik navigira po stranici(npr. klikne na 'Episodes' ili 'Cast')URL se mijenja, a stranica se ne refresha jer Next.js koristi client-side routing.
+    //Pathname se koristi kako bi vizualno označili aktivnu sekciju gdje se korisnik nalazi tako što se doda border crvene boje ispod aktivne sekcije.
+    //usePathname prati URL i vraća string(npr. /show/1/episodes)
     const pathname = usePathname();
     return (
         <nav className="flex justify-start space-x-8 border-b border-gray-300 text-xl font-bold">

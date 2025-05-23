@@ -1,13 +1,15 @@
+//Ova komponenta omogućuje korisniku povratak na prethodnu stranicu koristeći hook za navigaciju.
+//Koristi se hook useRouter jer omogućava pristup funkciji 'back' koja se oslanja na povijest preglednika.
 "use client";
-//useRouter - hook koji služi za upravljanje navigacijom(promjena stranica) i pristup informacijama o trenutnoj ruti
+
 import { useRouter } from "next/navigation";
 
 export default function BackButton() {
-  //useRouter vraća objekt koji omogućuje upravljanje navigacijom(preusmjeravanje i povratak natrag)
+  //useRouter omogućava promjenu stranice i povratak bez ponovnog učitavanja cijele stranice
   const router = useRouter();
 
   function handleClick() {
-    // pozivom back vraćamo korisnika na prethodnu stranicu
+    //router.back() vraća korisnika na prethodnu stranicu u povijesti preglednika
     router.back();
   }
 

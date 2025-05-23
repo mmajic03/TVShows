@@ -1,10 +1,11 @@
+//Ova komponenta prikazuje osnovne informacije o jednoj epizodi (sliku, ime, sezonu i broj epizode) i omogućava otvaranje modalnog prozora s detaljnijim informacijama.
 "use client";
 import Image from "next/image";
 import { useState } from "react";
 import EpisodeModal from "./EpisodeModal";
 
-//prikaz kartice jedne epizode, kada se klikne na nju otvori se modalni prozor s informacijama o toj epizodi
 export default function EpisodeCard({ episode }) {
+  //showModal je stanje koje kontrolira prikaz modalnog prozora s detaljima epizode
   const [showModal, setShowModal] = useState(false);
   const closeModal = () => setShowModal(false);
   return (

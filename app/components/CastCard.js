@@ -1,9 +1,11 @@
+//Ova komponenta prikazuje osnovne informacije o jednom glumcu (sliku, ime, lik kojeg glumi)
+//i omogućava otvaranje modalnog prozora s detaljnijim informacijama o tom glumcu.
 "use client"
 import { useState } from "react";
 import Image from "next/image";
 import CastModal from "./CastModal";
-//prikaz kartice jednog glumca, kada se klikne na nju otvori se modalni prozor s informacijama o tom glumcu
 export default function CastCard({ cast }) {
+  //showModal je stanje koje kontrolira prikaz modalnog prozora s detaljima glumca
   const [showModal, setShowModal] = useState(false);
   const closeModal = () => setShowModal(false);
   return (

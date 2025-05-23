@@ -1,15 +1,24 @@
+//Komponenta omogućuje korisniku da doda seriju u favorite i prikazuje trenutno stanje tog procesa
+//koristeći startTransition kako bi se moglo ažurirati bez blokiranja korisničkog sučelja.
 "use client";
 import { useState, useEffect, useTransition } from "react";
 
 export default function FavoriteButton({ id, isFavorite}) {
+   //Stanje koje prati je li serija spremljena kao favorit.
+  //Postavlja se prema početnom 'isFavorite' iz roditeljske komponente.
   const [saved, setSaved] = useState(isFavorite);
+   //useTransition omogućuje da se zahtjevi i promjene stanja pokrenu bez blokiranja korisničkog sučelja
+  //React automatski optimizira ažuriranja u pozadini i korisnik ne primjećuje usporavanje.
   const [isPending, startTransition] = useTransition();
+  //Koristi se za prikazivanje stanja dok se radi provjera s API-ja
   const [checking, setChecking] = useState(true); 
 
-  //provjerava se je li određena serija već u favoritima tj. je li taj dani ID već postoji
-  //u favoritima. Ako postoji, stanje saved se postavlja na true i checking na false
+  
   useEffect(() => {
+    //Ako roditelj već zna da je favorit, preskačemo dodatnu provjeru.
     if (isFavorite) return;
+    //provjerava se jel serija već u favoritima tako da šalje GET zahtjev, ako je, saved se postavlja na true i prikazat će
+    //se na gumbu 'Saved'
     fetch("/api/favorites")
       .then((res) => res.json())
       .then((data) => {
@@ -20,8 +29,8 @@ export default function FavoriteButton({ id, isFavorite}) {
       .finally(() => setChecking(false));
   }, [isFavorite, id]);
 
-
-  //dodavanje serija u favorite slanjem POST zahtjeva
+  //Ova funkcija koristi startTransition kako bi pozadinski poziv na API
+  //izvršila bez blokiranja korisničkog sučelja.
   function addFavorites() {
     startTransition(async () => {
     const res = await fetch("/api/favorites", {

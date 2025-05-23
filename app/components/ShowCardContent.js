@@ -1,7 +1,8 @@
+//Komponenta prikazuje sažetak serije u obliku kartice na početnoj stranici uključujući sliku, naziv, datum premijere, žanrove, ocjenu i trajanje
+// te omogućuje navigaciju do detaljne stranice serije.
 import Image from "next/image";
 import Link from "next/link";
 import { Clock, Star } from "lucide-react";
-//prikaz male kartice svake serije na početnoj stranici
 export default function ShowCardContent({ show }) {
   return (
     <>

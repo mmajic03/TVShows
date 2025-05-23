@@ -1,3 +1,5 @@
+//Ova layout komponenta definira zajednički izgled za stranice s omiljnim serijama i epizodama
+//Prikazuje navigacijsku traku sa 'Shows' i 'Episodes' i ističe trenutno aktivnu stranicu pomoću usePathname.
 "use client"
 import Link from "next/link";
 import { usePathname } from "next/navigation";

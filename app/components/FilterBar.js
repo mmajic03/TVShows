@@ -1,3 +1,4 @@
+//Ova komponenta prikazuje sučelje za filtriranje i sortiranje sadržaja po žanru i kriterijima 'Top rated' i 'Latest' za desktop i mobilne uređaje.
 "use client";
 import { useState } from "react";
 import DesktopFilters from "./DesktopFilters";

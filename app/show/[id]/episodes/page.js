@@ -1,10 +1,12 @@
+//Komponenta dohvaća i prikazuje epizode serije čiji se ID nalazi u URL-u. Parametar 'params' sadrži.
+//dinamičke dijelove rute(npr. id serije) koji dolaze iz URL-a što omogučuje dohvat odgovarajućih
+//epizoda s API-ja i prikaz njihovih kartica
 import EpisodeCard from "@/app/components/EpisodeCard";
-
-//prikazuju se epizode određene serije
 export default async function Episodes({ params }) {
+    //params je objekt koji Next.js prosljeđuje komponenti i sadrđi parove ključ vrijednost koji predstavljaju
+    //dinamičke dijelove URL-a(npr. u /show/1 params će biti {id: "1"})
     const { id } = await params;
 
-    //dohvaćanje epizoda
     const episodesRes = await fetch(`https://api.tvmaze.com/shows/${id}/episodes`);
 
     if (!episodesRes.ok) {

@@ -1,7 +1,11 @@
+//Komponenta dohvaća i prikazuje glumce serije čiji se ID nalazi u URL-u.
+//Parametar 'params' sadrži dinamičke dijelove rute (npr. id serije) koji dolaze iz URL-a,
+//što omogućuje dohvat odgovarajućih podataka o glumcima s API-ja i prikaz njihovih kartica.
 import CastCard from "@/app/components/CastCard";
 
-//prikaz glumaca pojedine serije
 export default async function Cast({ params }) {
+    // params je objekt koji Next.js prosljeđuje komponenti i sadrži parove ključ-vrijednost
+    // koji predstavljaju dinamičke dijelove URL-a (npr. u /show/1 params će biti {id: "1"})
     const { id } = await params;
 
     const res = await fetch(`https://api.tvmaze.com/shows/${id}/cast`);

@@ -1,5 +1,5 @@
+//404 stranica greške koja se prikazuje kada korisnik pokuša otvoriti URL koji još ne postoji
 import Link from "next/link";
-//Prikazuje se kada korisnik dođe na stranicu koja ne postoji
 export default function NotFound() {
   return (
     <div className="flex items-center justify-center relative min-h-screen bg-white">

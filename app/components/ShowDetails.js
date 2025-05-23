@@ -1,13 +1,19 @@
+//Komponenta prikazuje detaljne informacije o pojedinoj TV seriji.
+//Dohvaća i prikazuje status označavanja serije kao favorita iz API-ja.
 "use client";
 import { useEffect, useState } from "react";
 //ikone se koriste iz biblioteke Lucide React
 import { Star, Clock } from "lucide-react";
 import FavoriteButton from "./FavoriteButton";
-//prikaz informacija za svaku seriju
 export default function ShowDetails({ show, episodes }) {
+    //favorites - trenutno stanje tj. trenutni popis serija(niz) koje je korisnik označio kao favorite
+    //setFavorites - funkcija kojom se ažurira to stanje
     const [favorites, setFavorites] = useState([]);
+    //označava je li trenutno prikazana serija među favoritima
     const [isFavorite, setIsFavorite] = useState(false);
 
+    // Dohvaćaju se podaci s API-ja, a rezultati se spremaju u lokalno stanje komponente pomoću setFavorites,
+    // čime se omogućuje ažuriran prikaz podataka bez potrebe za ponovnim učitavanjem stranice.
     useEffect(() => {
     fetch("/api/favorites")
     .then(res => res.json())

@@ -1,3 +1,4 @@
+//Footer prikazuje donji dio stranice s linkovima na glavne dijelove stranice, društvene mreže i ostale informacije.
 import Link from "next/link";
 import { CopyrightIcon } from "lucide-react";
 

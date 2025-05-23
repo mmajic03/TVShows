@@ -1,16 +1,18 @@
+//Komponenta  omogućuje korisniku da doda epizodu u favorite i prikazuje trenutno stanje tog procesa na način koji ne usporava sučelje.
 "use client";
 import { useState, useEffect, useTransition } from "react";
 
 export default function FavoriteEpisodeButton({ id, isFavorite }) {
-//pamti epizodu koja je spremljen au favorite
+//pamti epizodu koja je spremljena u favorite
   const [saved, setSaved] = useState(isFavorite);
   //isPending - bit će true dok se radi neka pozadinska radnja(npr. spremanje favorita na server)
   //startTransition - koristi za manje bitne radnje koje mogu sačekati kako bi važnije stvari u sučelju bile prikazane odmah
   const [isPending, startTransition] = useTransition();
-  //stanje koje označava da se još uvijek provjerava je li epizoda među favoritima
+  // checking označava da se još provjerava status favorita sa servera prije nego se omogući klik
   const [checking, setChecking] = useState(true);
 
-
+//ovaj useEffect provjerava je li epizoda već među favoritima, ali smao ako ta infomacija nije već 
+//proslijeđena kroz props. Time se osigurava da se gumb pravilno inicijalizira i ne šalje višak zahtjeva.
   useEffect(() => {
     if (isFavorite) return;
     fetch("/api/favoriteEpisodes")
@@ -23,7 +25,8 @@ export default function FavoriteEpisodeButton({ id, isFavorite }) {
       .finally(() => setChecking(false));
   }, [isFavorite, id]); 
 
-//funkcija za dodavanje epizode u favorite
+  //Ova funkcija koristi startTransition kako bi pozadinski poziv na API
+  //izvršila bez blokiranja korisničkog sučelja.
   function addFavorites() {
     startTransition(async () => {
       const res = await fetch("/api/favoriteEpisodes", {
@@ -40,6 +43,7 @@ export default function FavoriteEpisodeButton({ id, isFavorite }) {
 
   return (
     <button
+    //gumb je onemogučen ako je epizoda već spremljena, ako spremanje traje ili ako se još provjerava je li među favoritima
       disabled={saved || isPending || checking}
       onClick={addFavorites}
       className={`px-4 py-2 rounded font-semibold border ${

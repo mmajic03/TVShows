@@ -1,17 +1,18 @@
+//Ova komponenta prikazuje pojedinačnu epizodu dodanu u omiljene s gumbom za uklanjanje iz omiljenih.
 "use client";
 import { useState, useTransition } from "react";
 import { X } from "lucide-react";
 import EpisodeCard from "./EpisodeCard";
 
-//komponenta prikazuje određenu seriju koja je dodana u favorite, ali s gumbom za uklanjanje
 export default function FavoriteEpisodeCard({ episode }) {
-  //određuje treba li se kartica prikazivati
+  //isVisible kontrolira hoće li se kartica prikazivati nakon uklanjanja.
   const [isVisible, setIsVisible] = useState(true);
-  //prikaz stanja dok se čeka kad će se ukloniti kartica
   const [isPending, startTransition] = useTransition();
 
-  //funkcija za brisanje epizode iz omiljenih
+
   async function removeFavorite() {
+    //startTransition označava da je slijedeća promjena stanja manje prioritetna,
+    //što omogućuje korisničkom sučelju da ostane responzivno tijekom async brisanja.
     startTransition(async () => {
     const res = await fetch("/api/favoriteEpisodes", {
       method: "DELETE",

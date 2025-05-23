@@ -1,3 +1,5 @@
+//Komponenta prikazuje detaljnije informacije o odabranoj epizodi u modalnom prozoru
+//Dohvaća se informacija o tome je li epizoda označena kao favorit pozivom API-ja.
 import Image from "next/image";
 import {X} from 'lucide-react';
 import { useState, useEffect } from "react";
@@ -6,6 +8,9 @@ import FavoriteEpisodeButton from "./FavoriteEpisodeButton";
 //modalni prozor koji prikazuje informacije o određenoj epizodi
 export default function EpisodeModal({ episode, closeModal}) {
     const [isFavorite, setIsFavorite] = useState(false);
+
+    //useEffect se pokreće svaki put kada se promijeni episode.id tj. kada se otvori modalni prozor za novu epizodu
+    //Poziva se API koji dohvaća favorite sa servera i provjerava je li ta epizoda u favoritima.
     useEffect(() => {
         fetch("/api/favoriteEpisodes")
         .then((res) => res.json())
@@ -37,6 +42,7 @@ export default function EpisodeModal({ episode, closeModal}) {
                 <p className="text-gray-700 w-full"><strong className="text-black">Rating:</strong> {episode.rating?.average}</p>
                 <p className="text-gray-700 w-full"><strong className="text-black">Runtime:</strong> {episode.runtime} min</p>
                 <div className="text-gray-700 w-full"><strong className="text-black">Summary:</strong>
+                {/*Korištenje dangerouslySetInnerHTML-a ovdje je sigurno jer sadržaj dolazi iz provjerenog API-ja(tvmaze.com)*/}
                     {episode.summary && (
                         <div
                             className="text-gray-700 text-sm w-full pt-1"

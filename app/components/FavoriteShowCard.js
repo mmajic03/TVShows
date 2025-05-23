@@ -1,13 +1,19 @@
+//Ova komponenta prikazuje pojedinačnu seriju koja je dodana u favorite s mogućnošću uklanjanja te serije iz omiljenih.
 "use client";
 import { useState, useTransition } from "react";
 import { X } from "lucide-react";
 import ShowCardContent from "./ShowCardContent";
 
 export default function FavoriteShowCard({ show }) {
+  //isVisible određuje prikaz kartice nakon uklanjanja.
   const [isVisible, setIsVisible] = useState(true);
+  //useTransition se koristi da korisničko sučelje ne usporava dok se async zadatak izvršava.
+  //isPending se koristi da se onemogući gumb dok traje uklanjanje, da se ne može kliknuti više puta.
   const [isPending, startTransition] = useTransition();
 
   async function removeFavorite() {
+    //startTransition označava da slijedeća promjena stanja nije hitna,
+    //što omogućuje prioritetno renderiranje drugih važnijih promjena korisničkog sučelja.
     startTransition(async () => {
     const res = await fetch("/api/favorites", {
       method: "DELETE",
@@ -19,6 +25,7 @@ export default function FavoriteShowCard({ show }) {
   });
 }
 
+  //Ako je isVisible false, kartica se više ne prikazuje.
   if (!isVisible) return null;
 
   return (

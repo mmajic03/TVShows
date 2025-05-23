@@ -1,4 +1,6 @@
-//Ova komponenta se poziva dok se učitavaju podaci(npr. dohvaćaju s API-ja)
+//Ova komponenta se koristi kada treba korisniku prikazati da se podaci ili stranica
+//trenutno učitavaju tj. da mora pričekati jer sadržaj još nije spreman za prikaz.
+//Prikazuje se animirani vrteći kružić(animate-spin) i poruka 'Loading...'.
 export default function Loading() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-white text-gray-800">

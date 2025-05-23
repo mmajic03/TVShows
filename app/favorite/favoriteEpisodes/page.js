@@ -1,3 +1,6 @@
+//Ova komponenta prikazuje sve epizode koje je korisnik označio kao omiljene.
+//Najprije dohvaća ID-eve spremljenih epizoda iz lokalnog API-ja(/api/favoriteEpisodes), 
+//zatim za svaki ID dohvaća detalje epizode s vanjskog API-ja(TVMaze).
 "use client";
 import { useEffect, useState } from "react";
 import FavoriteEpisodeCard from "@/app/components/FavoriteEpisodesCard";
@@ -6,6 +9,8 @@ export default function FavoriteEpisodesPage() {
   const [episodes, setEpisodes] = useState(null);
   const [error, setError] = useState(null);
 
+  //useEffect služi za dohvat podataka odmah nakon prvog renderiranja komponente.
+  //useEffect ne podržava async funkciju direktno, pa unutar njega definiramo i odmah pozivamo zasebnu async funkciju fetchFavoriteEpisodes.
   useEffect(() => {
     async function fetchFavoriteEpisodes() {
       try {
@@ -19,6 +24,8 @@ export default function FavoriteEpisodesPage() {
           return;
         }
 
+        //Za svaki ID epizode dohvaćamo detalje s TVMaze API-ja.
+        //Koristimo Promise.all za paralelno dohvaćanje svih epizoda zbog bržeg učitavanja.
         const episodesData = await Promise.all(
           favoriteEpisodes.map(async (id) => {
             const res = await fetch(`https://api.tvmaze.com/episodes/${id}`);

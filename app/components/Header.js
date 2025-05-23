@@ -1,3 +1,5 @@
+//Header komponenta prikazuje navigaciju na vrhu stranice.
+//Dinamički označava aktivnu stranicu i prilagođava se veličini ekrana(desktop/mobilna verzija).
 "use client"
 import Link from "next/link";
 import { useState } from "react";
@@ -17,7 +19,6 @@ export default function Header() {
         <Link href={"/favorite"} className={pathname === "/favorite" ? "text-red-600" : "text-black"}>FAVORITES</Link>
         <Link href={"/about"} className={pathname === "/about" ? "text-red-600" : "text-black"}>ABOUT</Link>
       </nav>
-    {/*gumb za otvaranje i zatvaranje mobilnog menija */}
       <button 
         onClick={() => setMenuOpen(!menuOpen)} 
         className="md:hidden text-3xl" >{menuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
