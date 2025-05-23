@@ -53,7 +53,7 @@ export default function FavoriteEpisodesPage() {
   if (!episodes) 
     return (
       <div className="flex items-center justify-center mt-[100px]">
-        <div className="p-4 text-2xl text-gray-600">Loading...</div>
+        <div className="p-4 text-4xl text-gray-600">Loading...</div>
       </div>
     );
     
