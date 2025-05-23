@@ -44,9 +44,18 @@ export default function FavoriteEpisodesPage() {
   }, []);
 
   if (error) 
-    return <div className="p-4 text-red-600">{error}</div>
+    return (
+      <div className="flex items-center justify-center mt-[100px]">
+        <div className="p-4 text-2xl text-red-600">{error}</div>
+      </div>
+    );
+
   if (!episodes) 
-    return <div className="p-4">Loading...</div>
+    return (
+      <div className="flex items-center justify-center mt-[100px]">
+        <div className="p-4 text-2xl text-gray-600">Loading...</div>
+      </div>
+    );
     
   if (episodes.length === 0)
     return (
