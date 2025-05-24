@@ -18,7 +18,6 @@ export default function Footer() {
                     <li className="mb-3">Explore our site</li>
                     <li><Link href={"/"}>Home</Link></li>
                     <li><Link href={"/favorite"}>Favorites</Link></li>
-                    <li><Link href={"/"}>About</Link></li>
                 </ul>
             </div>
             <div className="text-black lg:pl-10">
