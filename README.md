@@ -1,14 +1,14 @@
-# Projektni zadatak
-# ShowTime
----
+# ShowTime - projektni zadatak
 
-- Opis projekta  
-- Pregled funkcionalnosti  
-- Upute za lokalno pokretanje  
-- Build i deploy  
-- Poznate greške i buduće nadogradnje  
+## Sadržaj
+- [Opis projekta](#opis-projekta)  
+- [Pregled funkcionalnosti](#pregled-funkcionalnosti)  
+- [Upute za lokalno pokretanje](#upute-za-lokalno-pokretanje)  
+- [Build i deploy](#build-i-deploy)  
+- [Poznate greške i buduće nadogradnje](#poznate-greške-i-buduće-nadogradnje)  
 
----
+--- 
+
 
 ## Opis projekta
 
@@ -55,18 +55,18 @@ Korisnici mogu dodavati i uklanjati serije iz favorita, a za upravljanje favorit
 - **DEPLOY NA VERCEL**  
   - Stranica je spremna za produkcijsko okruženje i uspješno deployana na Vercel  
 
-## Upute za pokretanje
+## Upute za lokalno pokretanje
 - git clone https://github.com/mmajic03/TVShows
 - npm install
 - npm run dev
 
 
-## BUILD I DEPLOY 
+## Build i deploy 
   - npm run build
   - npm start
   - Link na produkcijsku verziju: https://tv-shows-mz0djnw1h-monikas-projects-d53a34a2.vercel.app
 
-## POZNATE GREŠKE I BUDUĆE NADOGRADNJE 
+## Poznate greške i buduće nadogradnje 
   - Buduće nadogradnje:
     - Na stranici s epizodama omogućiti prikaz epizoda po sezonama ili dodati padajući izbornik za odabir sezone.
     - Integracija s GitHub OAuth-om i spremanje favorita po korisniku u kolačiće(u tijeku).
