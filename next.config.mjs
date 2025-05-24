@@ -11,7 +11,8 @@ const nextConfig = {
         hostname: 'static.tvmaze.com',
       },
     ],
-    //Ovo govori tražilicama da mogu pronaći i prikazati sve stranice ove web stranice.
+  },
+     //Ovo govori tražilicama da mogu pronaći i prikazati sve stranice ove web stranice.
     async headers() {
     return [
       {
@@ -28,8 +29,6 @@ const nextConfig = {
       },
     ];
   },
-  },
-
 };
 
 export default nextConfig;
