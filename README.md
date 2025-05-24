@@ -7,9 +7,6 @@
 - [Build i deploy](#build-i-deploy)  
 - [Poznate greške i buduće nadogradnje](#poznate-greške-i-buduće-nadogradnje)  
 
---- 
-
-
 ## Opis projekta
 
 Cilj ovog projekta je izrada web stranice u Next.js-u koja korisnicima omogućava istraživanje TV serija i pregled detaljnih informacija o svakoj od njih. Podaci o serijama, epizodama, glumcima i članovima produkcije dohvaćaju se putem TV Maze API-ja. Na početnoj stranici prikazuje se prvih 20 serija uz mogućnost učitavanja dodatnih serija. Svaka serija ima svoju zasebnu stranicu s detaljnijim informacijama, popisom epizoda, detaljima o glumcima i produkciji.
