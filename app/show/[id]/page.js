@@ -26,21 +26,13 @@ export async function generateMetadata({ params }) {
 export default async function Show({ params }) {
     const { id } = await params;
     
-    //Dohvaćaju se podaci o seriji i epizodama paralelno. Koristi se 'Promise all' kako bi se oba fetch poziva
-    //izvršila istovremeno što bi značajno poboljšalo performanse jer smanjuje ukupno vrijeme čekanja na podatke nego
-    //kad bi se izvršavali jedan nakon drugog.
-    const [showRes, episodesRes] = await Promise.all([
-    fetch(`https://api.tvmaze.com/shows/${id}`),
-    fetch(`https://api.tvmaze.com/shows/${id}/episodes`),
-  ]);
-
-  if (!showRes.ok) 
-    throw new Error("Show not found");
-  if (!episodesRes.ok) 
-    throw new Error("Episodes not found");
-
-  const show = await showRes.json();
-  const episodes = await episodesRes.json();
+    //Dohvaćaju se  podaci o seriji i njezinim epizodama u jednom API pozivu koristeći ?embed=episodes, 
+    //a zatim se iz odgovora izdvaja serija i popis epizoda iz show._embedded.episodes.
+    //embed se koristi za dobivanje povezanih podataka
+    const res = await fetch(`https://api.tvmaze.com/shows/${id}?embed=episodes`);
+    if (!res.ok) throw new Error("Show not found");
+    const show = await res.json();
+    const episodes = show._embedded?.episodes || [];
 
     return (
         <div className="flex flex-col justify-start w-full bg-white/80 ">
