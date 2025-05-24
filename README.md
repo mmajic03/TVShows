@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Projektni zadatak
+# ShowTime
+---
 
-## Getting Started
+- Opis projekta  
+- Pregled funkcionalnosti  
+- Upute za lokalno pokretanje  
+- Build i deploy  
+- Poznate greške i buduće nadogradnje  
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Opis projekta
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Cilj ovog projekta je izrada web stranice u Next.js-u koja korisnicima omogućava istraživanje TV serija i pregled detaljnih informacija o svakoj od njih. Podaci o serijama, epizodama, glumcima i članovima produkcije dohvaćaju se putem TV Maze API-ja. Na početnoj stranici prikazuje se prvih 20 serija uz mogućnost učitavanja dodatnih serija. Svaka serija ima svoju zasebnu stranicu s detaljnijim informacijama, popisom epizoda, detaljima o glumcima i produkciji.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Korisnici mogu dodavati i uklanjati serije iz favorita, a za upravljanje favoritima implementirana je vlastita API ruta. Također su osigurane globalne stranice za prikaz učitavanja sadržaja te za nepostojeće stranice, a aplikacija je optimizirana za SEO i performanse. Među dodatnim značajkama nalaze se pretraživanje i filtriranje serija po žanrovima.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Pregled funkcionalnosti
 
-## Learn More
+- **POČETNA STRANICA**  
+  - Header i footer  
+  - Prikaz 20-ak prvih serija s TV Maze API-ja (https://www.tvmaze.com/api)  
+  - Sortiranje serija prema datumu premijere (od novijih prema starijima)  
+  - Sortiranje serija prema ocjeni (od viših prema nižima)  
+  - Pretraživanje serija (search input)  
+  - Gumb ‘Load more’ za prikaz dodatnih serija (učitava sljedećih 7 serija jer je offset postavljen na 7)  
 
-To learn more about Next.js, take a look at the following resources:
+- **DINAMIČKE RUTE**  
+  - `/shows/[id]` - detalji pojedine serije (poster, status, žanrovi, ocjena itd.)  
+  - `/shows/[id]/episodes` - prikaz svih epizoda serije s osnovnim podacima  
+    - Klikom na određenu epizodu otvara se modalni prozor s više informacija  
+  - `/shows/[id]/cast` - prikaz svih glumaca serije s osnovnim podacima  
+    - Klikom na određenog glumca otvara se modalni prozor s više informacija  
+  - `/shows/[id]/crew` - prikaz svih članova produkcije te serije s osnovnim podacima  
+    - Klikom na određenu osobu otvara se modalni prozor s više informacija  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **FAVORITI**  
+  - Dodavanje/brisanje serija iz favorita pomoću komponenti `FavoriteButton`  
+  - Dodavanje/brisanje epizoda iz favorita pomoću `FavoriteEpisodeButton`  
+  - API ruta `app/api/favorites` omogućuje dodavanje (POST), dohvat (GET) i brisanje (DELETE) serija  
+  - API ruta `app/api/favoriteEpisodes` omogućuje dodavanje (POST), dohvat (GET) i brisanje (DELETE) epizoda  
+  - `/favorite` i `/favoriteEpisodes` – stranice s prikazom spremljenih serija i epizoda  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **404 STRANICA (NOT-FOUND)**  
+  - Prikazuje se kada korisnik pokuša otvoriti nepostojeću stranicu (globalno)  
 
-## Deploy on Vercel
+- **LOADING STRANICA**  
+  - Prikazuje se dok se podaci učitavaju (globalno)  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **SEO I OPTIMIZACIJA**  
+  - Dinamičko generiranje meta podataka (naslov, opis, Open Graph slika) na temelju podataka serije  
+  - Globalni metapodaci za osnovne SEO informacije (naziv stranice, opis, ključne riječi, favicon itd.)  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **DEPLOY NA VERCEL**  
+  - Stranica je spremna za produkcijsko okruženje i uspješno deployana na Vercel  
+
+## Upute za pokretanje
+- git clone https://github.com/mmajic03/TVShows
+- npm install
+- npm run dev
+
+
+## BUILD I DEPLOY 
+  - npm run build
+  - npm start
+  - Link na produkcijsku verziju: https://tv-shows-mz0djnw1h-monikas-projects-d53a34a2.vercel.app
+
+## POZNATE GREŠKE I BUDUĆE NADOGRADNJE 
+  - Buduće nadogradnje:
+    - Na stranici s epizodama omogućiti prikaz epizoda po sezonama ili dodati padajući izbornik za odabir sezone.
+    - Integracija s GitHub OAuth-om i spremanje favorita po korisniku u kolačiće(u tijeku).
+    - Dodavanje glumaca u favorite.
+    - Poboljšati izgled navigacije na stranici za serije, njezine epizode i glumce.
+
+
+
+
+
+
+
