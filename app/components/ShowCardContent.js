@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Clock, Star } from "lucide-react";
-export default function ShowCardContent({ show }) {
+export default function ShowCardContent({ show, priority = false }) {
   return (
     <>
       <Link href={`/show/${show.id}`}>
@@ -13,6 +13,8 @@ export default function ShowCardContent({ show }) {
           width={400} 
           height={600}
           className="rounded-xl object-contain"
+          //priority je prop koji odmah učita sliku jer je važna za prikaz stranice. Ovdje priority postavljamo samo na prvu sliku.
+          priority={priority}
         />
         <div className="flex flex-col p-4 gap-2">
           <h2 className="text-2xl text-center font-semibold text-black mb-2 sm:text-left">{show.name}</h2>
