@@ -12,22 +12,22 @@ const nextConfig = {
       },
     ],
   },
-     //Ovo govori tražilicama da mogu pronaći i prikazati sve stranice ove web stranice.
+    //Ovo govori tražilicama da mogu pronaći i prikazati sve stranice ove web stranice.
     async headers() {
-    return [
-      {
-         //Ovo znači da vrijedi za sve stranice
-        source: '/(.*)',
-        headers: [
-          {
-            //Ovo je ime zaglavlja koje šaljemo
-            key: 'X-Robots-Tag',
-            //Ova vrijednost govori tražilicama da smiju pronaći i prikazati naše stranice u rezultatima pretraživanja
-            value: 'index, follow', 
-          },
-        ],
-      },
-    ];
+      return [
+        {
+          //Ovo znači da vrijedi za sve stranice
+          source: '/(.*)',
+          headers: [
+            {
+              //Ovo je ime zaglavlja koje šaljemo
+              key: 'X-Robots-Tag',
+              //Ova vrijednost govori tražilicama da smiju pronaći i prikazati naše stranice u rezultatima pretraživanja
+              value: 'index, follow', 
+            },
+          ],
+        },
+      ];
   },
 };
 
