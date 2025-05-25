@@ -14,6 +14,8 @@ Cilj ovog projekta je izrada web stranice u Next.js-u koja korisnicima omogućav
 
 Korisnici mogu dodavati i uklanjati serije iz favorita, a za upravljanje favoritima implementirana je vlastita API ruta. Također su osigurane globalne stranice za prikaz učitavanja sadržaja te za nepostojeće stranice, a aplikacija je optimizirana za SEO i performanse. Među dodatnim značajkama nalaze se pretraživanje i filtriranje serija po žanrovima.
 
+Izvještaj: https://www.notion.so/ShowTime-projektni-zadatak-1fd26d18c24380e0bda6ea07dfeff63a?pvs=4
+
 ## Pregled funkcionalnosti
 
 - **POČETNA STRANICA**  
