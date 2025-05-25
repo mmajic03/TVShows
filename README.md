@@ -2,7 +2,8 @@
 
 ## Sadržaj
 - [Opis projekta](#opis-projekta)  
-- [Pregled funkcionalnosti](#pregled-funkcionalnosti)  
+- [Pregled funkcionalnosti](#pregled-funkcionalnosti)
+- [Korištene tehnologije](#korištene-tehnologije)
 - [Upute za lokalno pokretanje](#upute-za-lokalno-pokretanje)  
 - [Build i deploy](#build-i-deploy)  
 - [Poznate greške i buduće nadogradnje](#poznate-greške-i-buduće-nadogradnje)  
@@ -52,6 +53,13 @@ Korisnici mogu dodavati i uklanjati serije iz favorita, a za upravljanje favorit
 - **DEPLOY NA VERCEL**  
   - Stranica je spremna za produkcijsko okruženje i uspješno deployana na Vercel  
 
+## Korištene tehnologije
+- [Next.js 15](https://nextjs.org/)
+- [Tailwind CSS v4](https://tailwindcss.com/)
+- [TVmaze API](https://www.tvmaze.com/api)
+- [Lucide React](https://lucide.dev/)
+- [Vercel](https://vercel.com/)
+
 ## Upute za lokalno pokretanje
 - git clone https://github.com/mmajic03/TVShows
 - npm install
@@ -61,12 +69,12 @@ Korisnici mogu dodavati i uklanjati serije iz favorita, a za upravljanje favorit
 ## Build i deploy 
   - npm run build
   - npm start
-  - Link na produkcijsku verziju: https://tv-shows-mz0djnw1h-monikas-projects-d53a34a2.vercel.app
+  - Link na produkcijsku verziju: https://tv-shows-4nmmdwk6u-monikas-projects-d53a34a2.vercel.app
 
 ## Poznate greške i buduće nadogradnje 
   - Buduće nadogradnje:
     - Na stranici s epizodama omogućiti prikaz epizoda po sezonama ili dodati padajući izbornik za odabir sezone.
-    - Integracija s GitHub OAuth-om i spremanje favorita po korisniku u kolačiće(u tijeku).
+    - Integracija s GitHub OAuth-om i spremanje favorita po korisniku u cookie.
     - Dodavanje glumaca u favorite.
     - Poboljšati izgled navigacije na stranici za serije, njezine epizode i glumce.
 
