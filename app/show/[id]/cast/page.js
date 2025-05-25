@@ -4,8 +4,8 @@
 import CastCard from "@/app/components/CastCard";
 
 export default async function Cast({ params }) {
-    // params je objekt koji Next.js prosljeđuje komponenti i sadrži parove ključ-vrijednost
-    // koji predstavljaju dinamičke dijelove URL-a (npr. u /show/1 params će biti {id: "1"})
+    //params je objekt koji Next.js prosljeđuje komponenti i sadrži parove ključ-vrijednost
+    //koji predstavljaju dinamičke dijelove URL-a (npr. u /show/1 params će biti {id: "1"})
     const { id } = await params;
 
     const res = await fetch(`https://api.tvmaze.com/shows/${id}/cast`);

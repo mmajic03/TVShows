@@ -12,7 +12,7 @@ export default function FavoriteShowCard({ show }) {
   const [isPending, startTransition] = useTransition();
 
   async function removeFavorite() {
-    //startTransition označava da slijedeća promjena stanja nije hitna,
+    //startTransition označava da sljedeća promjena stanja nije hitna,
     //što omogućuje prioritetno renderiranje drugih važnijih promjena korisničkog sučelja.
     startTransition(async () => {
     const res = await fetch("/api/favorites", {

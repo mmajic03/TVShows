@@ -1,5 +1,5 @@
 //Komponenta prikazuje detaljne informacije o pojedinoj TV seriji.
-//Dohvaća i prikazuje status označavanja serije kao favorita iz API-ja.
+//Dohvaća favorite i prikazuje status označavanja serije kao favorita.
 "use client";
 import { useEffect, useState } from "react";
 //ikone se koriste iz biblioteke Lucide React
@@ -12,8 +12,8 @@ export default function ShowDetails({ show, episodes }) {
     //označava je li trenutno prikazana serija među favoritima
     const [isFavorite, setIsFavorite] = useState(false);
 
-    // Dohvaćaju se podaci s API-ja, a rezultati se spremaju u lokalno stanje komponente pomoću setFavorites,
-    // čime se omogućuje ažuriran prikaz podataka bez potrebe za ponovnim učitavanjem stranice.
+    //Dohvaćaju se podaci s API-ja, a rezultati se spremaju u lokalno stanje komponente pomoću setFavorites,
+    //čime se omogućuje ažuriran prikaz podataka bez potrebe za ponovnim učitavanjem stranice.
     useEffect(() => {
     fetch("/api/favorites")
     .then(res => res.json())
@@ -41,6 +41,8 @@ export default function ShowDetails({ show, episodes }) {
                 <div><strong className="text-gray-700">Premiered:</strong> {show.premiered}</div>
                 <div><strong className="text-gray-700">Genre:</strong> {show.genres.join(" | ")}</div>
                 <div><strong className="text-gray-700">Schedule:</strong> {show.schedule?.days.join(", ")} at {show.schedule?.time}</div>
+                {/*? u 'show.network?.name' znači da ako postoji show.netvork uzima show.network.name, a ako ne postoji
+                vraća undefined umjesto da izbaci grešku.*/}
                 <div><strong className="text-gray-700">Network:</strong> {show.network?.name || show.webChannel?.name}</div>
                 <div><strong className="text-gray-700">Status:</strong> {show.status}</div>
                 <div><strong className="text-gray-700">Show type:</strong> {show.type}</div>

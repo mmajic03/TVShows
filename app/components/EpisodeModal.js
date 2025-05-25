@@ -5,7 +5,6 @@ import {X} from 'lucide-react';
 import { useState, useEffect } from "react";
 import FavoriteEpisodeButton from "./FavoriteEpisodeButton";
 
-//modalni prozor koji prikazuje informacije o određenoj epizodi
 export default function EpisodeModal({ episode, closeModal}) {
     const [isFavorite, setIsFavorite] = useState(false);
 

@@ -9,7 +9,7 @@ export async function GET() {
 }
 
 //POST prima JSON objekt s ID-em koji treba dodati u favorite. Provjeravamo je li ID prisutan, a sa favorites.includes
-//spriječava dodavanje duplikata u favorite
+//spriječava dodavanje duplikata u favorite.
 export async function POST(request) {
     const body = await request.json(); 
     if (!body?.id) { 

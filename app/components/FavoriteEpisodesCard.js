@@ -11,7 +11,7 @@ export default function FavoriteEpisodeCard({ episode }) {
 
 
   async function removeFavorite() {
-    //startTransition označava da je slijedeća promjena stanja manje prioritetna,
+    //startTransition označava da je sljedeća promjena stanja manje prioritetna,
     //što omogućuje korisničkom sučelju da ostane responzivno tijekom async brisanja.
     startTransition(async () => {
     const res = await fetch("/api/favoriteEpisodes", {
@@ -20,7 +20,7 @@ export default function FavoriteEpisodeCard({ episode }) {
       body: JSON.stringify({ id: episode.id }),
     });
     if (res.ok) 
-        setIsVisible(false);
+      setIsVisible(false);
   });
 }
 

@@ -1,5 +1,5 @@
- //Ova komponenta prikazuje sve serije koje je korisnik označio kao omiljene.
- //Dohvaća ID-eve spremljenih serija(/api/favorites), zatim za svaki ID dohvaća detalje serije s vanjskog API-ja(TVMaze).
+//Ova komponenta prikazuje sve serije koje je korisnik označio kao omiljene.
+//Dohvaća ID-eve spremljenih serija(/api/favorites), zatim za svaki ID dohvaća detalje serije s vanjskog API-ja(TVMaze).
 "use client";
 import { useEffect, useState } from "react";
 import FavoriteShowCard from "../components/FavoriteShowCard";
@@ -26,7 +26,7 @@ export default function FavoritesPage() {
           })
         );
         setShows(showsData);
-      } catch (e) {
+      }catch(e){
         setError(e.message);
       }
     }

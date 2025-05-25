@@ -33,14 +33,14 @@ export default function FavoriteEpisodesPage() {
             return res.json();
           })
         );
-
         setEpisodes(episodesData);
-      } catch (e) {
+      }catch(e){
         setError(e.message);
       }
     }
 
     fetchFavoriteEpisodes();
+    
   }, []);
 
   if (error) 

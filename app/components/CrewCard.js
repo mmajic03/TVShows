@@ -1,5 +1,5 @@
-// Ova komponenta prikazuje osnovne informacije o jednom članu produkcijskog tima (slika, ime, uloga)
-// i omogućava otvaranje modalnog prozora s detaljnijim informacijama o toj osobi.
+//Ova komponenta prikazuje osnovne informacije o jednom članu produkcijskog tima (slika, ime, uloga)
+//i omogućava otvaranje modalnog prozora s detaljnijim informacijama o toj osobi.
 "use client"
 import Image from "next/image";
 import { useState } from "react";

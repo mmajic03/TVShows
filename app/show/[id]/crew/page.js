@@ -3,8 +3,8 @@
 //(npr. id serije) koji omogućuju dohvat odgovarajućih podataka s API-ja.
 import CrewCard from "@/app/components/CrewCard";
 export default async function CrewPage({ params }) {
-    // params je objekt koji Next.js prosljeđuje komponenti i sadrži parove ključ-vrijednost
-    // koji predstavljaju dinamičke dijelove URL-a (npr. u /show/1/crew, params će biti { id: "1" }).
+    //params je objekt koji Next.js prosljeđuje komponenti i sadrži parove ključ-vrijednost
+    //koji predstavljaju dinamičke dijelove URL-a (npr. u /show/1/crew, params će biti { id: "1" }).
     const { id } = await params;
 
     const res = await fetch(`https://api.tvmaze.com/shows/${id}/crew`);
@@ -13,7 +13,7 @@ export default async function CrewPage({ params }) {
 
     const crew = await res.json();
 
-    // Ako nema podataka o produkcijskom timu, ispisiva se poruka o grešci
+    //Ako nema podataka o produkcijskom timu, ispisiva se poruka o grešci
     if(crew.length === 0 )
         throw new Error("No crew data available");
 

@@ -20,13 +20,13 @@ export default function Home(){
     "Family", "Fantasy", "History", "Horror", "Legal", "Medical", "Music", "Mystery", 
     "Romance", "Science-Fiction", "Sports", "Supernatural", "Thriller", "War", "Western"];
 
-  //Dohvaća popis serija s TVmaze API-js kad se promijeni broj stranice.
+  //Dohvaća popis serija s TVmaze API-ja kad se promijeni broj stranice.
   //Postavlja se loading stanje dok traje dohvat i ažurira prikaz serija nakon što podaci stignu.
-  //Ovaj API vraća podatke o serijama u stranicama kako nebi ušitavao sve odjednom jer bi to predugo trajalo
-  //i zauzimalo bi puno memorije
+  //Ovaj API vraća podatke o serijama u stranicama kako nebi učitavao sve odjednom jer bi to predugo trajalo
+  //i zauzimalo bi puno memorije.
   useEffect(() => {
     setIsLoading(true); 
-    fetch(`https://api.tvmaze.com/shows?page=0`)
+    fetch(`https://api.tvmaze.com/shows?page=${page}`)
     .then(res => res.json())
     .then(data => {
       setShow(data);
@@ -50,7 +50,7 @@ export default function Home(){
         const date2 = b.premiered ? new Date(b.premiered) : new Date(0);
         return date2 - date1;
       }
-      //sortiranje prema prosječnoj ocjeni korisnika
+      //sortiranje prema prosječnoj ocjeni
       if (filter === "Top rated") {
         const rating1 = a.rating.average;
         const rating2 = b.rating.average;
@@ -92,7 +92,7 @@ export default function Home(){
           ))}
         </div>
         {/*ako je offset(broj trenutno prikazanih serija) manji od ukupnog broja serija koje su prošli filtriranje
-        (filterAll.length) gumb se prikaže */}
+        (filterAll.length) gumb se prikaže*/}
         <div className="flex justify-center my-6">
           {offset < filteredAll.length && (
             <button 

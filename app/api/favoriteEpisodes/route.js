@@ -3,7 +3,7 @@ let favoriteEpisodes = [];
 
 //GET vraća trenutni popis omiljenih epizoda kao JSON.
 //Ova metoda se koristi za prikaz omiljenih epizoda na klijentskoj strani.
-// Nema cache logike jer se favoriti mogu često mijenjati i želimo uvijek najnovije stanje.
+//Nema cache logike jer se favoriti mogu često mijenjati i želimo uvijek najnovije stanje.
 export async function GET() {
     return Response.json({ favoriteEpisodes });
 }

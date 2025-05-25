@@ -3,16 +3,16 @@
 import { useState, useEffect, useTransition } from "react";
 
 export default function FavoriteEpisodeButton({ id, isFavorite }) {
-//pamti epizodu koja je spremljena u favorite
+  //pamti epizodu koja je spremljena u favorite
   const [saved, setSaved] = useState(isFavorite);
   //isPending - bit će true dok se radi neka pozadinska radnja(npr. spremanje favorita na server)
-  //startTransition - koristi za manje bitne radnje koje mogu sačekati kako bi važnije stvari u sučelju bile prikazane odmah
+  //startTransition - koristi se za manje bitne radnje koje mogu sačekati kako bi važnije stvari u sučelju bile prikazane odmah
   const [isPending, startTransition] = useTransition();
-  // checking označava da se još provjerava status favorita sa servera prije nego se omogući klik
+  //checking označava da se još provjerava status favorita sa servera prije nego se omogući klik
   const [checking, setChecking] = useState(true);
 
-//ovaj useEffect provjerava je li epizoda već među favoritima, ali smao ako ta infomacija nije već 
-//proslijeđena kroz props. Time se osigurava da se gumb pravilno inicijalizira i ne šalje višak zahtjeva.
+  //ovaj useEffect provjerava je li epizoda već među favoritima, ali samo ako ta infomacija nije već 
+  //proslijeđena kroz props. Time se osigurava da se gumb pravilno inicijalizira i ne šalje višak zahtjeva.
   useEffect(() => {
     if (isFavorite) return;
     fetch("/api/favoriteEpisodes")
