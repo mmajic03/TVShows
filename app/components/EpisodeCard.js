@@ -5,12 +5,12 @@ import { useState } from "react";
 import EpisodeModal from "./EpisodeModal";
 
 export default function EpisodeCard({ episode }) {
-  //showModal je stanje koje kontrolira prikaz modalnog prozora s detaljima epizode
-  const [showModal, setShowModal] = useState(false);
-  const closeModal = () => setShowModal(false);
+  //episodeModal je stanje koje kontrolira prikaz modalnog prozora s detaljima epizode
+  const [episodeModal, setEpisodeModal] = useState(false);
+  const closeModal = () => setEpisodeModal(false);
   return (
     <>
-      <div onClick={() => setShowModal(true)} className="flex flex-col w-full max-w-[300px] bg-white shadow-md hover:shadow-lg rounded-2xl mb-20 cursor-pointer">
+      <div onClick={() => setEpisodeModal(true)} className="flex flex-col w-full max-w-[300px] bg-white shadow-md hover:shadow-lg rounded-2xl mb-20 cursor-pointer">
           <Image 
             src={episode.image.medium} 
             alt={episode.name} 
@@ -23,7 +23,7 @@ export default function EpisodeCard({ episode }) {
             <p className="text-sm text-gray-600 text-center">Season: {episode.season} |  Episode: {episode.number}</p>
           </div>
        </div>
-        {showModal && (
+        {episodeModal && (
             <EpisodeModal episode={episode} closeModal={closeModal}/>
           )}
      </>
