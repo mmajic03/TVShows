@@ -71,7 +71,7 @@ Izvještaj: https://www.notion.so/ShowTime-projektni-zadatak-1fd26d18c24380e0bda
 ## Build i deploy 
   - npm run build
   - npm start
-  - Link na produkcijsku verziju: https://tv-shows-2ib3yi8cb-monikas-projects-d53a34a2.vercel.app
+  - Link na produkcijsku verziju: https://tv-shows-kappa.vercel.app/
 
 ## Poznate greške i buduće nadogradnje 
   - Buduće nadogradnje:
