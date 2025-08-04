@@ -6,7 +6,7 @@
 - [Korištene tehnologije](#korištene-tehnologije)
 - [Upute za lokalno pokretanje](#upute-za-lokalno-pokretanje)  
 - [Build i deploy](#build-i-deploy)  
-- [Autentifikacija putem GitHub-a](#autentifikacija-putem-GitHuba)  
+- [Autentifikacija putem GitHub-a](#autentifikacija-putem-github-a)  
 
 ## Opis projekta
 
