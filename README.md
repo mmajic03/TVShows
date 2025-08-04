@@ -78,7 +78,7 @@ Izvještaj: https://www.notion.so/ShowTime-projektni-zadatak-1fd26d18c24380e0bda
  Za omogućavanje autentifikacije korisnika putem GitHub-a, ovu aplikaciju je potrebno dodati kao novu OAuth aplikaciju na GitHub-u.
  - Authorization callback URL: https://tv-shows-kappa.vercel.app/api/auth/callback/github
 
- U root direktoriju projekta potrebno je napraviti .env datoteku sa sljedećim varijablama:
+ U root direktoriju projekta potrebno je kreirati .env datoteku sa sljedećim varijablama:
  ```
     GITHUB_ID=
     GITHUB_SECRET=
