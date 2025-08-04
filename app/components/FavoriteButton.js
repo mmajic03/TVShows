@@ -14,11 +14,11 @@ export default function FavoriteButton({ id, isFavorite}) {
   const [isPending, startTransition] = useTransition();
   //Koristi se za prikazivanje stanja dok se radi provjera s API-ja
   const [checking, setChecking] = useState(true); 
-   const { data: session } = useSession();
+  const { data: session } = useSession();
 
   
   useEffect(() => {
-    //Ako roditelj već zna da je favorit, preskačemo dodatnu provjeru.
+    //Ako roditelj već zna da je favorit ili ako korisnik nije prijavljen, preskačemo dodatnu provjeru.
     if (isFavorite || !session) {
       setChecking(false);
       return;
@@ -38,6 +38,7 @@ export default function FavoriteButton({ id, isFavorite}) {
   //Ova funkcija koristi startTransition kako bi pozadinski poziv na API
   //izvršila bez blokiranja korisničkog sučelja.
   function addFavorites() {
+    //Ako korisnik nije prijavljen ne moze spremati u favorite, prvo se treba prijaviti
     if (!session) {
       signIn();
       return;

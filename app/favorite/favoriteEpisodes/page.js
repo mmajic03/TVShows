@@ -42,8 +42,10 @@ export default function FavoriteEpisodesPage() {
       }
     }
 
-      if (status === "authenticated") {
-        fetchFavoriteEpisodes();
+    //Prati se status prijave koji dolazi od useSession hooka.
+    //Status prijave određuje sto koomponenta prikazuje i koje podatke dohvaca.
+    if (status === "authenticated") {
+      fetchFavoriteEpisodes();
       } else if (status === "unauthenticated") {
         setEpisodes([]);
       }

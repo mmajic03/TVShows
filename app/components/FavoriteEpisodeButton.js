@@ -16,7 +16,7 @@ export default function FavoriteEpisodeButton({ id, isFavorite }) {
 
 
   //ovaj useEffect provjerava je li epizoda već među favoritima, ali samo ako ta infomacija nije već 
-  //proslijeđena kroz props. Time se osigurava da se gumb pravilno inicijalizira i ne šalje višak zahtjeva.
+  //proslijeđena kroz props i ako je korisnik prijavljen. Time se osigurava da se gumb pravilno inicijalizira i ne šalje višak zahtjeva.
   useEffect(() => {
     if (isFavorite || !session) {
       setChecking(false);
