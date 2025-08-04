@@ -79,10 +79,13 @@ Izvještaj: https://www.notion.so/ShowTime-projektni-zadatak-1fd26d18c24380e0bda
  - Authorization callback URL: https://tv-shows-kappa.vercel.app/api/auth/callback/github
 
  U root direktoriju projekta potrebno je napraviti .env datoteku sa sljedećim varijablama:
-  `GITHUB_ID
-  GITHUB_SECRET
-  NEXTAUTH_SECRET
-  NEXTAUTH_URL`
+ ```
+    GITHUB_ID=
+    GITHUB_SECRET=
+    NEXTAUTH_SECRET=
+    NEXTAUTH_URL=
+  ```
+
 
 ## Poznate greške i buduće nadogradnje 
   - Buduće nadogradnje:
