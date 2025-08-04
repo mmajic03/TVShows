@@ -6,6 +6,7 @@
 - [Korištene tehnologije](#korištene-tehnologije)
 - [Upute za lokalno pokretanje](#upute-za-lokalno-pokretanje)  
 - [Build i deploy](#build-i-deploy)  
+- [Autentifikacija putem GitHub-a](#autentifikacija-putem-GitHuba) 
 - [Poznate greške i buduće nadogradnje](#poznate-greške-i-buduće-nadogradnje)  
 
 ## Opis projekta
@@ -73,12 +74,20 @@ Izvještaj: https://www.notion.so/ShowTime-projektni-zadatak-1fd26d18c24380e0bda
   - npm start
   - Link na produkcijsku verziju: https://tv-shows-kappa.vercel.app/
 
+## Autentifikacija putem GitHub-a 
+ Za omogućavanje autentifikacije korisnika putem GitHub-a, ovu aplikaciju je potrebno dodati kao novu OAuth aplikaciju na GitHub-u.
+ - Authorization callback URL: https://tv-shows-kappa.vercel.app/api/auth/callback/github
+
+ U root direktoriju projekta potrebno je napraviti .env datoteku sa sljedećim varijablama:
+  `GITHUB_ID
+  GITHUB_SECRET
+  NEXTAUTH_SECRET
+  NEXTAUTH_URL`
+
 ## Poznate greške i buduće nadogradnje 
   - Buduće nadogradnje:
     - Na stranici s epizodama omogućiti prikaz epizoda po sezonama ili dodati padajući izbornik za odabir sezone.
-    - Integracija s GitHub OAuth-om i spremanje favorita po korisniku u cookie.
     - Dodavanje glumaca u favorite.
-    - Poboljšati izgled navigacije na stranici za serije, njezine epizode i glumce.
 
 
 
