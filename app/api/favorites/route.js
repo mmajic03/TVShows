@@ -1,20 +1,24 @@
-import { getServerSession } from "next-auth/next";
+import { getServerSession } from "next-auth/next";//Provjerava je li korisnik prijavljen(na serveru) i vraća podatke o njemu
 import { authOptions } from "@/lib/auth";
 import { createClient } from "@supabase/supabase-js";
 
+//kreira se klijent koji direktno komunicira s bazom
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
-//GET vraća favorite kao JSON. 
-//Ova metoda se koristi za prikaz favorita na klijentu.
-//Nema cache logike jer se favoriti mogu često mijenjati i želimo uvijek najnovije stanje.
+//Dohvati favorite prijavljenog korisnika iz baze i vrati ih kao JSON
+//Ako korisnik nije prijavljen, vrati grešku 401
+//Ako dođe do greške u bazi, vrati grešku 500
 export async function GET(request) {
+    //dohvaca trenutnu sesiju korisnika
     const session = await getServerSession(authOptions);
     if (!session?.user?.id) {
         return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
     }
 
+    //iz tablice 'favorites' gleda se stupac 'show_id'
+    //filtriraju se samo oni redovi gdje je 'user_id' jednak ID-u prijavljenog korisnika session.user.id
     const { data, error } = await supabase
         .from("favorites")
         .select("show_id")
@@ -41,6 +45,8 @@ export async function POST(request) {
         return Response.json({ error: "id missing" }, { status: 400 });
     }
 
+    //ubacuje novi zapis u tablicu 'favorites'
+    //dodaje vezu između korisnika(user_id: session.user.id) i omiljene serije(show_id: body.id)
     const { error } = await supabase.from("favorites").insert({
         user_id: session.user.id,
         show_id: body.id,
@@ -65,6 +71,8 @@ export async function DELETE(request) {
         return Response.json({ error: "id missing" }, { status: 400 });
     }
 
+    //brise zapis iz 'favorites' tablice
+    //brise redak gdje je user_id jednak ID-u prijavljenog korisnika i show_id jednak ID-u serije koju zelimo obrisati
     const { error } = await supabase
         .from("favorites")
         .delete()
