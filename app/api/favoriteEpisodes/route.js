@@ -1,36 +1,86 @@
-//Route handler koji omogućava dohvat, dodavanje i uklanjanje omiljenih epizoda pohranjenih u memoriji servera.
-let favoriteEpisodes = [];
+import { getServerSession } from "next-auth/next";//Provjerava je li korisnik prijavljen(na serveru) i vraća podatke o njemu
+import { authOptions } from "@/lib/auth";
+import { createClient } from "@supabase/supabase-js";
 
-//GET vraća trenutni popis omiljenih epizoda kao JSON.
-//Ova metoda se koristi za prikaz omiljenih epizoda na klijentskoj strani.
-//Nema cache logike jer se favoriti mogu često mijenjati i želimo uvijek najnovije stanje.
+//kreira se klijent koji direktno komunicira s bazom
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_ROLE_KEY
+);
+
+//Dohvati favorite prijavljenog korisnika iz baze i vrati ih kao JSON
 export async function GET() {
-    return Response.json({ favoriteEpisodes });
+  //dohvaca trenutnu sesiju korisnika
+  const session = await getServerSession(authOptions);
+  if (!session?.user?.id) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
+  }
+
+  //iz tablice 'favorite_episodes' gleda se stupac 'episode_id'
+  //filtriraju se samo oni redovi gdje je 'user_id' jednak ID-u prijavljenog korisnika session.user.id
+  const { data, error } = await supabase
+    .from("favorite_episodes")
+    .select("episode_id")
+    .eq("user_id", session.user.id);
+
+  if (error) {
+    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+  }
+
+  const favoriteEpisodes = data.map(item => item.episode_id);
+
+  return new Response(JSON.stringify({ favoriteEpisodes }), { status: 200 });
 }
 
-
-//POST prima JSON objekt s ID-em epizode koja se dodaje u favorite.
-//Provjerava postoji li ID, a metoda includes sprječava dodavanje duplikata u listu.
 export async function POST(request) {
-    const body = await request.json(); 
-    if (!body?.id) { 
-        return Response.json({ error: "id missing" }, { status: 400 });
-    }
+  const session = await getServerSession(authOptions);
+  if (!session?.user?.id) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
+  }
 
-    if (!favoriteEpisodes.includes(body.id))
-        favoriteEpisodes.push(body.id);
+  const body = await request.json();
 
-    return Response.json({ ok: true, favoriteEpisodes });
+  if (!body?.id) {
+    return new Response(JSON.stringify({ error: "id missing" }), { status: 400 });
+  }
+
+  //ubacuje novi zapis u tablicu 'favorite_episodes'
+  //dodaje vezu između korisnika(user_id: session.user.id) i omiljene epizode(episode_id: body.id)
+  const { data, error } = await supabase.from("favorite_episodes").insert({
+    user_id: session.user.id,
+    episode_id: body.id,
+  });
+
+  if (error) {
+    console.error("Supabase insert error:", error);
+    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+  }
+
+  return new Response(JSON.stringify({ ok: true }), { status: 200 });
 }
 
-//DELETE prima JSON objekt s ID-em epizode koja se uklanja iz favorite.
-//Koristi se filter za uklanjanje svih pojavljivanja danog ID-a iz niza.
 export async function DELETE(request) {
-    const body = await request.json(); 
-    if (!body?.id) {
-        return Response.json({ error: "id missing" }, { status: 400 });
-    }
+  const session = await getServerSession(authOptions);
+  if (!session?.user?.id) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
+  }
 
-    favoriteEpisodes = favoriteEpisodes.filter(item => item !== body.id);
-    return Response.json({ ok: true, favoriteEpisodes });
+  const body = await request.json();
+  if (!body?.id) {
+    return new Response(JSON.stringify({ error: "id missing" }), { status: 400 });
+  }
+
+  //brise zapis iz 'favorite_episodes' tablice
+  //brise redak gdje je user_id jednak ID-u prijavljenog korisnika i episode_id jednak ID-u epizode koju zelimo obrisati
+  const { error } = await supabase
+    .from("favorite_episodes")
+    .delete()
+    .eq("user_id", session.user.id)
+    .eq("episode_id", body.id);
+
+  if (error) {
+    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+  }
+
+  return new Response(JSON.stringify({ ok: true }), { status: 200 });
 }
