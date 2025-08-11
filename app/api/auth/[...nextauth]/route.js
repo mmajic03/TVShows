@@ -2,6 +2,7 @@
 //OAuth je sigurni standard za prijavu korisnika preko vanjskih servisa(npr.GitHub).
 //Umjesto da korisnik unosi email i lozinku, koristi se GitHub prijava kojom se dohvaćaju podaci korisnika.
 //https://next-auth.js.org/getting-started/example
+//https://dev.to/priyanshuverma/lets-integrate-authjs-with-supabase-mf7
 import NextAuth from "next-auth";
 import { authOptions } from "@/lib/auth";
 
