@@ -3,13 +3,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import FavoriteShowCard from "../components/FavoriteShowCard";
-import { useSession } from "next-auth/react";
 
 
 export default function FavoritesPage() {
   const [shows, setShows] = useState(null);
   const [error, setError] = useState(null);
-  const { data: session, status } = useSession();
 
 
   //useEffect se koristi kako bi dohvatili podatke kada se stranica učita tj. kad se komponenta prikaže prvi put.
@@ -34,23 +32,8 @@ export default function FavoritesPage() {
         setError(e.message);
       }
     }
-
-    if (status === "authenticated") {
       fetchFavorites();
-    } else if (status === "unauthenticated") {
-      setShows([]);
-    }
-  }, [status]);
-
-  if (status === "unauthenticated") {
-    return (
-      <div className="flex items-center justify-center mt-[100px]">
-        <div className="p-4 text-2xl text-gray-600">
-          You must be signed in to view your saved shows.
-        </div>
-      </div>
-    );
-  }
+  }, []);
   
   if (error) 
     return (

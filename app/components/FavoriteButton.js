@@ -2,7 +2,6 @@
 //koristeći startTransition kako bi se moglo ažurirati bez blokiranja korisničkog sučelja.
 "use client";
 import { useState, useEffect, useTransition } from "react";
-import { useSession, signIn } from "next-auth/react";
 
 
 export default function FavoriteButton({ id, isFavorite}) {
@@ -14,13 +13,11 @@ export default function FavoriteButton({ id, isFavorite}) {
   const [isPending, startTransition] = useTransition();
   //Koristi se za prikazivanje stanja dok se radi provjera s API-ja
   const [checking, setChecking] = useState(true); 
-  const { data: session } = useSession();
 
   
   useEffect(() => {
     //Ako roditelj već zna da je favorit ili ako korisnik nije prijavljen, preskačemo dodatnu provjeru.
-    if (isFavorite || !session) {
-      setChecking(false);
+    if (isFavorite) {
       return;
     }
     //provjerava se jel serija već u favoritima tako da šalje GET zahtjev, ako je, saved se postavlja na true i prikazat će
@@ -33,16 +30,11 @@ export default function FavoriteButton({ id, isFavorite}) {
         }
       })
       .finally(() => setChecking(false));
-  }, [isFavorite, id, session]);
+  }, [isFavorite, id]);
 
   //Ova funkcija koristi startTransition kako bi pozadinski poziv na API
   //izvršila bez blokiranja korisničkog sučelja.
   function addFavorites() {
-    //Ako korisnik nije prijavljen ne moze spremati u favorite, prvo se treba prijaviti
-    if (!session) {
-      signIn();
-      return;
-    }
     startTransition(async () => {
     const res = await fetch("/api/favorites", {
       method: "POST",

@@ -1,8 +1,6 @@
 //Komponenta  omogućuje korisniku da doda epizodu u favorite i prikazuje trenutno stanje tog procesa na način koji ne usporava sučelje.
 "use client";
 import { useState, useEffect, useTransition } from "react";
-import { useSession, signIn } from "next-auth/react";
-
 
 export default function FavoriteEpisodeButton({ id, isFavorite }) {
   //pamti epizodu koja je spremljena u favorite
@@ -12,14 +10,12 @@ export default function FavoriteEpisodeButton({ id, isFavorite }) {
   const [isPending, startTransition] = useTransition();
   //checking označava da se još provjerava status favorita sa servera prije nego se omogući klik
   const [checking, setChecking] = useState(true);
-  const { data: session } = useSession();
 
 
   //ovaj useEffect provjerava je li epizoda već među favoritima, ali samo ako ta infomacija nije već 
   //proslijeđena kroz props i ako je korisnik prijavljen. Time se osigurava da se gumb pravilno inicijalizira i ne šalje višak zahtjeva.
   useEffect(() => {
-    if (isFavorite || !session) {
-      setChecking(false);
+    if (isFavorite) {
       return;
     }
     fetch("/api/favoriteEpisodes")
@@ -30,15 +26,11 @@ export default function FavoriteEpisodeButton({ id, isFavorite }) {
         }
       })
       .finally(() => setChecking(false));
-  }, [isFavorite, id, session]); 
+  }, [isFavorite, id]); 
 
   //Ova funkcija koristi startTransition kako bi pozadinski poziv na API
   //izvršila bez blokiranja korisničkog sučelja.
   function addFavorites() {
-    if (!session) {
-      signIn();
-      return;
-    }
     startTransition(async () => {
       const res = await fetch("/api/favoriteEpisodes", {
         method: "POST",

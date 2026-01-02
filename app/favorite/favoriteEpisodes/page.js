@@ -4,12 +4,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import FavoriteEpisodeCard from "@/app/components/FavoriteEpisodesCard";
-import { useSession } from "next-auth/react";
 
 export default function FavoriteEpisodesPage() {
   const [episodes, setEpisodes] = useState(null);
   const [error, setError] = useState(null);
-  const { data: session, status } = useSession();
 
 
   //useEffect služi za dohvat podataka odmah nakon prvog renderiranja komponente.
@@ -41,23 +39,8 @@ export default function FavoriteEpisodesPage() {
         setError(e.message);
       }
     }
-
-    //Prati se status prijave koji dolazi od useSession hooka.
-    //Status prijave određuje sto koomponenta prikazuje i koje podatke dohvaca.
-    if (status === "authenticated") {
       fetchFavoriteEpisodes();
-      } else if (status === "unauthenticated") {
-        setEpisodes([]);
-      }
-    }, [status]);
-
-  if (status === "unauthenticated") {
-    return (
-      <div className="flex items-center justify-center mt-[100px]">
-        <div className="p-4 text-2xl text-gray-600">You must be signed in to view your saved episodes.</div>
-      </div>
-    );
-  }
+    }, []);
 
   if (error) 
     return (

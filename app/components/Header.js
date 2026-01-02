@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { Menu, X} from 'lucide-react';
 import { usePathname } from "next/navigation";
-import AuthButton from "./AuthButton";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -18,7 +17,6 @@ export default function Header() {
       <nav className="hidden md:flex space-x-8">
         <Link href={"/"} className={pathname === "/" ? "text-red-600" : "text-black"}>HOME</Link>
         <Link href={"/favorite"} className={pathname === "/favorite" ? "text-red-600" : "text-black"}>FAVORITES</Link>
-        <AuthButton />
       </nav>
       <button 
         onClick={() => setMenuOpen(!menuOpen)} 
@@ -29,9 +27,6 @@ export default function Header() {
         <nav className="md:hidden flex flex-col items-center w-full absolute bg-white border-t pb-4 top-20 left-0">
           <Link href="/" className="text-black py-2" onClick={() => setMenuOpen(false)}>HOME</Link>
           <Link href="/favorite" className="text-black py-2" onClick={() => setMenuOpen(false)}>FAVORITES</Link>
-          <div className="py-2">
-            <AuthButton />
-          </div>
         </nav>
       )}
     </div>
