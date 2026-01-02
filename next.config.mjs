@@ -10,6 +10,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'static.tvmaze.com',
       },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      },
     ],
   },
     //Ovo govori tražilicama da mogu pronaći i prikazati sve stranice ove web stranice.

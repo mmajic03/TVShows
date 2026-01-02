@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import BackButton from "./components/BackButton";
+import AuthProvider from "./components/SessionProvider";
 
 //Inicijalizacija fontova. Odabrani su Geist Sans(za osnovni tekst npr. naslovi, paragrafi...) i Geist Mono(za dijelove s kodom, brojevima i nekih tehničkih podataka kao npr. API odgovora i sl.)
 const geistSans = Geist({
@@ -37,14 +38,16 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
-        <Header/>
-        <div className="flex justify-start w-full mt-4 pl-4">
-          <BackButton />
-        </div>
-        <main className="flex-grow">
-          {children}
-        </main>
-        <Footer />
+        <AuthProvider>
+          <Header/>
+          <div className="flex justify-start w-full mt-4 pl-4">
+            <BackButton />
+          </div>
+          <main className="flex-grow">
+            {children}
+          </main>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );
