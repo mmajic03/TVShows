@@ -6,13 +6,13 @@
 - [Korištene tehnologije](#korištene-tehnologije)
 - [Upute za lokalno pokretanje](#upute-za-lokalno-pokretanje)  
 - [Build i deploy](#build-i-deploy)  
-- [Autentifikacija putem GitHub-a](#autentifikacija-putem-github-a)  
+- [Autentifikacija putem Google](#autentifikacija-putem-google)  
 
 ## Opis projekta
 
 Cilj ovog projekta je izrada web stranice u Next.js-u koja korisnicima omogućava istraživanje TV serija i pregled detaljnih informacija o svakoj od njih. Podaci o serijama, epizodama, glumcima i članovima produkcije dohvaćaju se putem TV Maze API-ja. Na početnoj stranici prikazuje se prvih 20 serija uz mogućnost učitavanja dodatnih serija. Svaka serija ima svoju zasebnu stranicu s detaljnijim informacijama, popisom epizoda, detaljima o glumcima i produkciji.
 
-Korisnici mogu dodavati i uklanjati serije iz favorita putem vlastite API rute koja komunicira sa Supabase bazom podataka pri čemu se favoriti povezuju s korisničkim računom. Također su osigurane globalne stranice za prikaz učitavanja sadržaja te za nepostojeće stranice, a aplikacija je optimizirana za SEO i performanse. Među dodatnim značajkama nalaze se pretraživanje i filtriranje serija po žanrovima te autentifikacija putem GitHub-a koristeći NextAuth.
+Korisnici mogu dodavati i uklanjati serije iz favorita putem vlastite API rute. Također su osigurane globalne stranice za prikaz učitavanja sadržaja te za nepostojeće stranice, a aplikacija je optimizirana za SEO i performanse. Među dodatnim značajkama nalaze se pretraživanje i filtriranje serija po žanrovima te autentifikacija putem Google računa.
 
 Izvještaj: https://www.notion.so/ShowTime-projektni-zadatak-1fd26d18c24380e0bda6ea07dfeff63a?pvs=4
 
@@ -38,8 +38,8 @@ Izvještaj: https://www.notion.so/ShowTime-projektni-zadatak-1fd26d18c24380e0bda
 - **FAVORITI**  
   - Dodavanje/brisanje serija iz favorita pomoću komponenti `FavoriteButton`  
   - Dodavanje/brisanje epizoda iz favorita pomoću `FavoriteEpisodeButton`  
-  - API ruta `app/api/favorites` omogućuje dodavanje (POST), dohvat (GET) i brisanje (DELETE) serija iz baze 
-  - API ruta `app/api/favoriteEpisodes` omogućuje dodavanje (POST), dohvat (GET) i brisanje (DELETE) epizoda iz baze
+  - API ruta `app/api/favorites` omogućuje dodavanje (POST), dohvat (GET) i brisanje (DELETE) serija
+  - API ruta `app/api/favoriteEpisodes` omogućuje dodavanje (POST), dohvat (GET) i brisanje (DELETE) epizoda
   - `/favorite` i `/favoriteEpisodes` – stranice s prikazom spremljenih serija i epizoda  
 
 - **404 STRANICA (NOT-FOUND)**  
@@ -59,7 +59,6 @@ Izvještaj: https://www.notion.so/ShowTime-projektni-zadatak-1fd26d18c24380e0bda
 - [Next.js 15](https://nextjs.org/)
 - [Tailwind CSS v4](https://tailwindcss.com/)
 - [NextAuth.js](https://next-auth.js.org/getting-started/example)
-- [Supabase](https://supabase.com/)
 - [TVmaze API](https://www.tvmaze.com/api)
 - [Lucide React](https://lucide.dev/)
 - [Vercel](https://vercel.com/)
@@ -75,19 +74,14 @@ Izvještaj: https://www.notion.so/ShowTime-projektni-zadatak-1fd26d18c24380e0bda
   - npm start
   - Link na produkcijsku verziju: https://tv-shows-kappa.vercel.app/
 
-## Autentifikacija putem GitHub-a 
- Za omogućavanje autentifikacije korisnika putem GitHub-a, ovu aplikaciju je potrebno dodati kao novu OAuth aplikaciju na GitHub-u.
- - Authorization callback URL: https://tv-shows-kappa.vercel.app/api/auth/callback/github
+## Autentifikacija putem Google
 
  U root direktoriju projekta potrebno je kreirati .env datoteku sa sljedećim varijablama:
  ```
-    GITHUB_ID=
-    GITHUB_SECRET=
+    GOOGLE_CLIENT_ID=
+    GOOGLE_CLIENT_SECRET=
     NEXTAUTH_SECRET=
     NEXTAUTH_URL=
-    SUPABASE_SERVICE_ROLE_KEY=
-    NEXT_PUBLIC_SUPABASE_ANON_KEY=
-    NEXT_PUBLIC_SUPABASE_URL=
   ```
 
 
