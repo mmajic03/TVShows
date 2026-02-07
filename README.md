@@ -6,7 +6,7 @@
 - [Korištene tehnologije](#korištene-tehnologije)
 - [Upute za lokalno pokretanje](#upute-za-lokalno-pokretanje)  
 - [Build i deploy](#build-i-deploy)  
-- [Baza (Supabase)](#baza-supabase)
+- [Supabase baza](#bazasupabase)
 
 ## Opis projekta
 
@@ -75,7 +75,6 @@ Izvještaj: https://www.notion.so/ShowTime-projektni-zadatak-1fd26d18c24380e0bda
   - Link na produkcijsku verziju: https://tv-shows-kappa.vercel.app/
 
 ## Baza(Supabase)
-
  U root direktoriju projekta potrebno je kreirati .env datoteku sa sljedećim varijablama:
  ```
    NEXT_PUBLIC_SUPABASE_ANON_KEY=
