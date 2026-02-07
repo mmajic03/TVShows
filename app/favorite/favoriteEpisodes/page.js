@@ -4,10 +4,13 @@
 "use client";
 import { useEffect, useState } from "react";
 import FavoriteEpisodeCard from "@/app/components/FavoriteEpisodesCard";
+import useAuthSession from "@/app/lib/useAuthSession";
+import { authedFetch } from "@/app/lib/authedFetch";
 
 export default function FavoriteEpisodesPage() {
   const [episodes, setEpisodes] = useState(null);
   const [error, setError] = useState(null);
+  const { user } = useAuthSession();
 
 
   //useEffect služi za dohvat podataka odmah nakon prvog renderiranja komponente.
@@ -15,7 +18,11 @@ export default function FavoriteEpisodesPage() {
   useEffect(() => {
     async function fetchFavoriteEpisodes() {
       try {
-        const res = await fetch("/api/favoriteEpisodes");
+        if (!user) {
+          setEpisodes([]);
+          return;
+        }
+        const res = await authedFetch("/api/favoriteEpisodes");
         if (!res.ok) throw new Error("Error fetching favorites");
 
         const { favoriteEpisodes } = await res.json();
@@ -38,9 +45,9 @@ export default function FavoriteEpisodesPage() {
       }catch(e){
         setError(e.message);
       }
-    }
-      fetchFavoriteEpisodes();
-    }, []);
+      }
+        fetchFavoriteEpisodes();
+    }, [user]);
 
   if (error) 
     return (
@@ -48,14 +55,30 @@ export default function FavoriteEpisodesPage() {
         <div className="p-4 text-2xl text-red-600">{error}</div>
       </div>
     );
-
+  
   if (!episodes) 
     return (
       <div className="flex items-center justify-center mt-[100px]">
-        <div className="p-4 text-4xl text-gray-600">Loading...</div>
+        <div className="p-4 text-4xl text-gray-600">No favorite episodes</div>
       </div>
     );
     
+  if (!user)
+    return (
+      <div className="flex flex-col items-center justify-center mt-[100px] gap-4">
+        <div className="p-4 text-2xl font-bold text-gray-600">
+          Please login to see favorites
+        </div>
+
+        <button
+          onClick={() => router.push("/login")}
+          className="px-6 py-4 rounded-lg font-semibold border bg-red-600 text-white hover:bg-red-700 cursor-pointer"
+        >
+          Login
+        </button>
+      </div>
+    );
+
   if (episodes.length === 0)
     return (
       <div className="flex items-center justify-center mt-[100px]">

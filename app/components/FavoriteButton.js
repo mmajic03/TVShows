@@ -2,6 +2,8 @@
 //koristeći startTransition kako bi se moglo ažurirati bez blokiranja korisničkog sučelja.
 "use client";
 import { useState, useEffect, useTransition } from "react";
+import useAuthSession from "../lib/useAuthSession";
+import { authedFetch } from "../lib/authedFetch";
 
 
 export default function FavoriteButton({ id, isFavorite}) {
@@ -13,16 +15,18 @@ export default function FavoriteButton({ id, isFavorite}) {
   const [isPending, startTransition] = useTransition();
   //Koristi se za prikazivanje stanja dok se radi provjera s API-ja
   const [checking, setChecking] = useState(true); 
+  const { user } = useAuthSession();
 
   
   useEffect(() => {
     //Ako roditelj već zna da je favorit ili ako korisnik nije prijavljen, preskačemo dodatnu provjeru.
-    if (isFavorite) {
+    if (isFavorite || !user) {
+      setChecking(false);
       return;
     }
     //provjerava se jel serija već u favoritima tako da šalje GET zahtjev, ako je, saved se postavlja na true i prikazat će
     //se na gumbu 'Saved'
-    fetch("/api/favorites")
+    authedFetch("/api/favorites")
       .then((res) => res.json())
       .then((data) => {
         if (data.favorites?.includes(id)) {
@@ -30,13 +34,19 @@ export default function FavoriteButton({ id, isFavorite}) {
         }
       })
       .finally(() => setChecking(false));
-  }, [isFavorite, id]);
+  }, [isFavorite, id, user]);
 
   //Ova funkcija koristi startTransition kako bi pozadinski poziv na API
   //izvršila bez blokiranja korisničkog sučelja.
   function addFavorites() {
+    if (!user) {
+      alert("You need to log in to add favorites.");
+      return;
+    }
     startTransition(async () => {
-    const res = await fetch("/api/favorites", {
+      if (!user)
+        return;
+    const res = await authedFetch("/api/favorites", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id }) 

@@ -1,6 +1,8 @@
 //Komponenta  omogućuje korisniku da doda epizodu u favorite i prikazuje trenutno stanje tog procesa na način koji ne usporava sučelje.
 "use client";
 import { useState, useEffect, useTransition } from "react";
+import useAuthSession from "../lib/useAuthSession";
+import { authedFetch } from "../lib/authedFetch";
 
 export default function FavoriteEpisodeButton({ id, isFavorite }) {
   //pamti epizodu koja je spremljena u favorite
@@ -10,15 +12,17 @@ export default function FavoriteEpisodeButton({ id, isFavorite }) {
   const [isPending, startTransition] = useTransition();
   //checking označava da se još provjerava status favorita sa servera prije nego se omogući klik
   const [checking, setChecking] = useState(true);
+  const { user } = useAuthSession();
 
 
   //ovaj useEffect provjerava je li epizoda već među favoritima, ali samo ako ta infomacija nije već 
   //proslijeđena kroz props i ako je korisnik prijavljen. Time se osigurava da se gumb pravilno inicijalizira i ne šalje višak zahtjeva.
   useEffect(() => {
-    if (isFavorite) {
+    if (isFavorite || !user) {
+      setChecking(false);
       return;
     }
-    fetch("/api/favoriteEpisodes")
+    authedFetch("/api/favoriteEpisodes")
       .then((res) => res.json())
       .then((data) => {
         if (data.favoriteEpisodes?.includes(id)) {
@@ -26,13 +30,20 @@ export default function FavoriteEpisodeButton({ id, isFavorite }) {
         }
       })
       .finally(() => setChecking(false));
-  }, [isFavorite, id]); 
+  }, [isFavorite, id, user]); 
 
   //Ova funkcija koristi startTransition kako bi pozadinski poziv na API
   //izvršila bez blokiranja korisničkog sučelja.
   function addFavorites() {
+      if (!user) {
+      alert("You need to log in to add favorites.");
+      return;
+    }
+
     startTransition(async () => {
-      const res = await fetch("/api/favoriteEpisodes", {
+      if (!user)
+        return;
+      const res = await authedFetch("/api/favoriteEpisodes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id }),
@@ -46,7 +57,7 @@ export default function FavoriteEpisodeButton({ id, isFavorite }) {
 
   return (
     <button
-    //gumb je onemogučen ako je epizoda već spremljena, ako spremanje traje ili ako se još provjerava je li među favoritima
+    //gumb je onemogućen ako je epizoda već spremljena, ako spremanje traje ili ako se još provjerava je li među favoritima
       disabled={saved || isPending || checking}
       onClick={addFavorites}
       className={`px-4 py-2 rounded font-semibold border ${

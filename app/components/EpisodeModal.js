@@ -4,20 +4,27 @@ import Image from "next/image";
 import {X} from 'lucide-react';
 import { useState, useEffect } from "react";
 import FavoriteEpisodeButton from "./FavoriteEpisodeButton";
+import useAuthSession from "../lib/useAuthSession";
+import { authedFetch } from "../lib/authedFetch";
 
 export default function EpisodeModal({ episode, closeModal}) {
     const [isFavorite, setIsFavorite] = useState(false);
+    const { user } = useAuthSession();
 
     //useEffect se pokreće svaki put kada se promijeni episode.id tj. kada se otvori modalni prozor za novu epizodu
     //Poziva se API koji dohvaća favorite sa servera i provjerava je li ta epizoda u favoritima.
     useEffect(() => {
-        fetch("/api/favoriteEpisodes")
+        if (!user) {
+            setIsFavorite(false);
+            return;
+        }
+        authedFetch("/api/favoriteEpisodes")
         .then((res) => res.json())
         .then((data) => {
             setIsFavorite(data.favoriteEpisodes.includes(episode.id));
         })
         .catch((err) => console.error("Failed to fetch favorite episodes", err));
-    }, [episode.id]);
+    }, [episode.id, user]);
     return (
     <>
         <div className="flex items-center justify-center fixed inset-0 z-50 bg-white/80">

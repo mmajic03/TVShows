@@ -3,11 +3,15 @@
 "use client";
 import { useEffect, useState } from "react";
 import FavoriteShowCard from "../components/FavoriteShowCard";
+//Vraća je li netko prijavljen i ako da, vraća informacije o korisniku
+import useAuthSession from "../lib/useAuthSession";
+import { authedFetch } from "../lib/authedFetch";
 
 
 export default function FavoritesPage() {
   const [shows, setShows] = useState(null);
   const [error, setError] = useState(null);
+  const { user } = useAuthSession();
 
 
   //useEffect se koristi kako bi dohvatili podatke kada se stranica učita tj. kad se komponenta prikaže prvi put.
@@ -15,8 +19,12 @@ export default function FavoritesPage() {
   useEffect(() => {
     async function fetchFavorites() {
       try {
+        if (!user) {
+          setShows([]);
+          return;
+        }
         //Dohvaćamo spremljene ID-eve serija iz lokalnog API-ja.
-        const res = await fetch("/api/favorites");
+        const res = await authedFetch("/api/favorites");
         const { favorites } = await res.json();
 
         //Za svaki ID dohvaćamo detalje serije s TVMaze API-ja.
@@ -33,7 +41,7 @@ export default function FavoritesPage() {
       }
     }
       fetchFavorites();
-  }, []);
+  }, [user]);
   
   if (error) 
     return (
@@ -45,7 +53,23 @@ export default function FavoritesPage() {
   if (!shows) 
     return (
       <div className="flex items-center justify-center mt-[100px]">
-        <div className="p-4 text-4xl text-gray-600">Loading...</div>
+        <div className="p-4 text-4xl text-gray-600">No favorite shows</div>
+      </div>
+    );
+
+  if (!user)
+    return (
+      <div className="flex flex-col items-center justify-center mt-[100px] gap-4">
+        <div className="p-4 text-2xl font-bold text-gray-600">
+          Please login to see favorites
+        </div>
+
+        <button
+          onClick={() => router.push("/login")}
+          className="px-6 py-4 rounded-lg font-semibold border bg-red-600 text-white hover:bg-red-700 cursor-pointer"
+        >
+          Login
+        </button>
       </div>
     );
 

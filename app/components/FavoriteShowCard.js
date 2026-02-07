@@ -3,6 +3,8 @@
 import { useState, useTransition } from "react";
 import { X } from "lucide-react";
 import ShowCardContent from "./ShowCardContent";
+import useAuthSession from "../lib/useAuthSession";
+import { authedFetch } from "../lib/authedFetch";
 
 export default function FavoriteShowCard({ show }) {
   //isVisible određuje prikaz kartice nakon uklanjanja.
@@ -10,28 +12,32 @@ export default function FavoriteShowCard({ show }) {
   //useTransition se koristi da korisničko sučelje ne usporava dok se async zadatak izvršava.
   //isPending se koristi da se onemogući gumb dok traje uklanjanje, da se ne može kliknuti više puta.
   const [isPending, startTransition] = useTransition();
+  const { user } = useAuthSession();
 
   async function removeFavorite() {
     //startTransition označava da sljedeća promjena stanja nije hitna,
     //što omogućuje prioritetno renderiranje drugih važnijih promjena korisničkog sučelja.
     startTransition(async () => {
-    const res = await fetch("/api/favorites", {
+      if (!user)
+        return;
+    const res = await authedFetch("/api/favorites", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: show.id }),
     });
-    if (res.ok) 
+      if (res.ok)
         setIsVisible(false);
   });
 }
 
   //Ako je isVisible false, kartica se više ne prikazuje.
-  if (!isVisible) return null;
+  if (!isVisible)
+    return null;
 
   return (
     <div className="relative flex flex-col w-full max-w-[400px] bg-white shadow-md hover:shadow-lg rounded-xl mx-auto">
       <button
-        disabled={isPending}
+        disabled={!user || isPending}
         onClick={removeFavorite}
         className="absolute top-2 right-2 p-1 text-black  bg-gray-100  hover:text-red-600 cursor-pointer rounded-full"
       >

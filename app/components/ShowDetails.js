@@ -5,23 +5,26 @@ import { useEffect, useState } from "react";
 //ikone se koriste iz biblioteke Lucide React
 import { Star, Clock } from "lucide-react";
 import FavoriteButton from "./FavoriteButton";
+import useAuthSession from "../lib/useAuthSession";
+import { authedFetch } from "../lib/authedFetch";
 export default function ShowDetails({ show, episodes }) {
-    //favorites - trenutno stanje tj. trenutni popis serija(niz) koje je korisnik označio kao favorite
-    //setFavorites - funkcija kojom se ažurira to stanje
-    const [favorites, setFavorites] = useState([]);
     //označava je li trenutno prikazana serija među favoritima
     const [isFavorite, setIsFavorite] = useState(false);
+    const { user } = useAuthSession();
 
     //Dohvaćaju se podaci s API-ja, a rezultati se spremaju u lokalno stanje komponente pomoću setFavorites,
     //čime se omogućuje ažuriran prikaz podataka bez potrebe za ponovnim učitavanjem stranice.
     useEffect(() => {
-    fetch("/api/favorites")
+    if (!user) {
+        setIsFavorite(false);
+        return;
+    }
+    authedFetch("/api/favorites")
     .then(res => res.json())
     .then(data => {
-        setFavorites(data.favorites || []);
         setIsFavorite(data.favorites?.includes(show.id));
     });
-  }, [show.id]);
+  }, [show.id, user]);
   
     return (
         <div className="w-full rounded-2xl p-4 lg:ml-[-40px] ml-0 ">
