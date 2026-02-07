@@ -6,13 +6,13 @@
 - [Korištene tehnologije](#korištene-tehnologije)
 - [Upute za lokalno pokretanje](#upute-za-lokalno-pokretanje)  
 - [Build i deploy](#build-i-deploy)  
-- [Autentifikacija](#autentifikacija)  
+- [Baza (Supabase)](#baza-supabase)
 
 ## Opis projekta
 
 Cilj ovog projekta je izrada web stranice u Next.js-u koja korisnicima omogućava istraživanje TV serija i pregled detaljnih informacija o svakoj od njih. Podaci o serijama, epizodama, glumcima i članovima produkcije dohvaćaju se putem TV Maze API-ja. Na početnoj stranici prikazuje se prvih 20 serija uz mogućnost učitavanja dodatnih serija. Svaka serija ima svoju zasebnu stranicu s detaljnijim informacijama, popisom epizoda, detaljima o glumcima i produkciji.
 
-Korisnici mogu dodavati i uklanjati serije iz favorita putem vlastite API rute. Također su osigurane globalne stranice za prikaz učitavanja sadržaja te za nepostojeće stranice, a aplikacija je optimizirana za SEO i performanse. Među dodatnim značajkama nalaze se pretraživanje i filtriranje serija po žanrovima te autentifikacija korisnika.
+Korisnici mogu dodavati i uklanjati serije iz favorita pri čemu se podaci pohranjuju u bazu podataka(Supabase). Također su osigurane globalne stranice za prikaz učitavanja sadržaja te za nepostojeće stranice, a aplikacija je optimizirana za SEO i performanse. Među dodatnim značajkama nalaze se pretraživanje i filtriranje serija po žanrovima te autentifikacija korisnika.
 
 Izvještaj: https://www.notion.so/ShowTime-projektni-zadatak-1fd26d18c24380e0bda6ea07dfeff63a?pvs=4
 
@@ -74,7 +74,7 @@ Izvještaj: https://www.notion.so/ShowTime-projektni-zadatak-1fd26d18c24380e0bda
   - npm start
   - Link na produkcijsku verziju: https://tv-shows-kappa.vercel.app/
 
-## Autentifikacija
+## Baza(Supabase)
 
  U root direktoriju projekta potrebno je kreirati .env datoteku sa sljedećim varijablama:
  ```
